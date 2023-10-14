@@ -40,16 +40,17 @@ public class Gun : MonoBehaviour
         if (!Physics.Raycast(ray, out var hit)) return;
         
         Debug.Log(hit.transform.name);
-        Instantiate(bulletHole, hit.point + (hit.normal * .01f), Quaternion.FromToRotation(Vector3.up, hit.normal));
-        // if (IsObjectReactiveTarget(hit.transform.gameObject, out var reactiveTarget))
-        // {
-        //     //reactiveTarget.ReactToHit();
-        // }
+        Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+        
+        if (IsObjectReactiveTarget(hit.transform.gameObject, out var reactiveTarget))
+        {
+            reactiveTarget.ReactToHit();
+        }
     }
     
-    // private bool IsObjectReactiveTarget(GameObject @object, out ReactiveTarget reactiveTarget)
-    // {
-    //     reactiveTarget = @object.GetComponent<ReactiveTarget>();
-    //     return reactiveTarget is not null;
-    // }
+    private bool IsObjectReactiveTarget(GameObject @object, out ReactiveTarget reactiveTarget)
+    {
+        reactiveTarget = @object.GetComponent<ReactiveTarget>();
+        return reactiveTarget is not null;
+    }
 }
