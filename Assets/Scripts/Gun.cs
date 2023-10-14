@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using Static_Classes;
 using UnityEditor.Search;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Gun : MonoBehaviour
 {
     [SerializeField] private float damage = 10f;
     [SerializeField] private float fireRate = 15f;
-    [SerializeField] private GameObject impactEffect;
+    [FormerlySerializedAs("impactEffect")] [SerializeField] private GameObject bulletHole;
     [SerializeField] private ParticleSystem particleSystem;
     
     private Camera _mainCamera;
@@ -39,7 +40,7 @@ public class Gun : MonoBehaviour
         if (!Physics.Raycast(ray, out var hit)) return;
         
         Debug.Log(hit.transform.name);
-        Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+        Instantiate(bulletHole, hit.point + (hit.normal * .01f), Quaternion.FromToRotation(Vector3.up, hit.normal));
         // if (IsObjectReactiveTarget(hit.transform.gameObject, out var reactiveTarget))
         // {
         //     //reactiveTarget.ReactToHit();
