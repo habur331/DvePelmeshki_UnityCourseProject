@@ -40,15 +40,16 @@ public class Gun : MonoBehaviour
         
         Debug.Log(hit.transform.name);
         Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-        // if (IsObjectReactiveTarget(hit.transform.gameObject, out var reactiveTarget))
-        // {
-        //     //reactiveTarget.ReactToHit();
-        // }
+        
+        if (IsObjectReactiveTarget(hit.transform.gameObject, out var reactiveTarget))
+        {
+            reactiveTarget.ReactToHit();
+        }
     }
     
-    // private bool IsObjectReactiveTarget(GameObject @object, out ReactiveTarget reactiveTarget)
-    // {
-    //     reactiveTarget = @object.GetComponent<ReactiveTarget>();
-    //     return reactiveTarget is not null;
-    // }
+    private bool IsObjectReactiveTarget(GameObject @object, out ReactiveTarget reactiveTarget)
+    {
+        reactiveTarget = @object.GetComponent<ReactiveTarget>();
+        return reactiveTarget is not null;
+    }
 }
