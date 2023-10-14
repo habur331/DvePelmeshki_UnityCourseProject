@@ -33,13 +33,13 @@ public class Gun : MonoBehaviour
     private void Shoot()
     {
         particleSystem.Play();
-        var screenCenter = _mainCamera.transform.position;
-        var ray = _mainCamera.ScreenPointToRay(screenCenter);
-
+        var cameraTransform = _mainCamera.transform;
+        
+        var ray = new Ray(cameraTransform.position, cameraTransform.forward);
         if (!Physics.Raycast(ray, out var hit)) return;
         
         Debug.Log(hit.transform.name);
-        //Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+        Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
         // if (IsObjectReactiveTarget(hit.transform.gameObject, out var reactiveTarget))
         // {
         //     //reactiveTarget.ReactToHit();
