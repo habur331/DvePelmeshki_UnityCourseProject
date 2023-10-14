@@ -11,7 +11,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private float damage = 10f;
     [SerializeField] private float fireRate = 15f;
     [SerializeField] private GameObject bulletHole;
-    [SerializeField] private ParticleSystem particleSystem;
+    [SerializeField] private new ParticleSystem particleSystem;
     
     private Camera _mainCamera;
     private float _nextTimeToFire = 0f;
