@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -9,61 +10,98 @@ namespace AimingTrainingRoom
     public class AimingTrainingScene : MonoBehaviour
     {
         [SerializeField] private int level;
-        [SerializeField] GameObject dartboardPrefab;
-        private List<GameObject> dartboards;
+        [SerializeField] private GameObject dartboardPrefab;
+        [SerializeField] private int numberDartboardsOnScene;
+        [FormerlySerializedAs("hitedDartboards")] [SerializeField] private int hitedDartboardsCount;
+        [SerializeField] private List<Dartboard> dartboards;
 
         public void Start()
         {
-            level = 1;
-
-            CreateDartboard();
+            dartboards = new();
+            numberDartboardsOnScene = 3;
+        }
+        
+        public void Update()
+        {
+            if (dartboards.Count == 0 && hitedDartboardsCount >= level * numberDartboardsOnScene && level >= 1)
+            {
+                LevelUp();
+            }
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player")) // Предположим, что игрок имеет тег "Player"
+            Debug.Log("ВХОД в тренировочную прицела.");
+            if (other.CompareTag("Player"))
             {
                 StartGame();
             }
         }
-        public void Update()
+
+        private void OnTriggerExit(Collider other)
         {
-            if (dartboards.Count == 0)
-                LevelUp();
+            Debug.Log("ВЫХОД в тренировочную прицела.");
+            FinishGame();
+        }
+
+        private void FinishGame()
+        {
+            Debug.Log($"Игра закончилась на уровне {level}.");
+            level = 0;
+            ClearDartBoard();
         }
 
         private void StartGame()
         {
-            level = 0;
-            
-            CreateDartboard();
+            Debug.Log("Игра началась");
+            SetDartboardsGroup();
+            level = 1;
+            hitedDartboardsCount = 0;
         }
 
         private void LevelUp()
         {
             level++;
 
-            CreateDartboard();
+            Debug.Log($"Поднятие уровня на {level}");
+            SetDartboardsGroup();
         }
 
-        private void CreateDartboard()
+        public void RemoveDartboard(Dartboard dartboard)
         {
-            dartboards.Clear();
-
-            int numberOfDartboardsToCreate = 3;
-
-            for (int i = 0; i < numberOfDartboardsToCreate; i++)
+            dartboards.Remove(dartboard);
+        }
+        private void ClearDartBoard()
+        {
+            foreach (var dartboard in dartboards)
+            {
+                dartboard.StartCoroutine(dartboard.Die());
+            }
+        }
+        private void SetDartboardsGroup()
+        {
+            ClearDartBoard();
+            
+            Thread.Sleep(2);
+            
+            for (int i = 0; i < numberDartboardsOnScene; i++)
             {
                 // Генерируем случайные координаты для новой мишени
-                float randomX = Random.Range(-10f, 10f); // Измените границы по X на ваши нужды
-                float randomY = Random.Range(0.5f, 5f); // Измените границы по Y на ваши нужды
-                float randomZ = Random.Range(-10f, 10f); // Измените границы по Z на ваши нужды
+                float randomX = Random.Range(-15f, 15f);
+                float randomY = 1f;
+                float randomZ = Random.Range(-25f, -50f);
 
                 // Создаем новую мишень в случайной позиции и добавляем ее в список
                 Vector3 randomPosition = new Vector3(randomX, randomY, randomZ);
-                GameObject newDartboard = Instantiate(dartboardPrefab, randomPosition, Quaternion.identity);
-                dartboards.Add(newDartboard);
+                var newDartboard = Instantiate(dartboardPrefab, randomPosition, Quaternion.Euler(0, 180, 0));
+                dartboards.Add(newDartboard.GetComponent<Dartboard>());
             }
+        }
+
+        public void MarkHitTarget(Dartboard target)
+        {
+            if (dartboards.Contains(target))
+                hitedDartboardsCount++;
         }
     }
 }

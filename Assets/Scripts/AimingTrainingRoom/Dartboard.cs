@@ -11,21 +11,37 @@ namespace AimingTrainingRoom
     
         private void Start()
         {
+            StartCoroutine(StartMoving());
+        }
+
+        private IEnumerator StartMoving()
+        {
+            float raiseDuration = 3.0f;
+         
+            transform.DORotate(new Vector3(-90, 0, 0), raiseDuration, RotateMode.WorldAxisAdd);
+            
+            yield return new WaitForSeconds(raiseDuration);
+            
             float speed = baseSpeed * difficulty;
 
             transform.DOMoveX(5, 2 / speed) // 2 is the duration
                 .SetLoops(-1, LoopType.Yoyo)
                 .SetEase(Ease.InOutSine);
         }
-        public void ReactToHit()
+        public override void ReactToHit()
         {
             Debug.Log("Попал в мишень.");
+            
+            FindObjectOfType<AimingTrainingScene>().MarkHitTarget(this);
+            
             StartCoroutine(Die());
         }
-        private IEnumerator Die()
+        public IEnumerator Die()
         {
-            this.transform.Rotate(-75, 0, 0);
+            this.transform.Rotate(75, 0, 0);
             yield return new WaitForSeconds(1.5f);
+            
+            FindObjectOfType<AimingTrainingScene>().RemoveDartboard(this);
             Destroy(this.gameObject);
         }
     }
