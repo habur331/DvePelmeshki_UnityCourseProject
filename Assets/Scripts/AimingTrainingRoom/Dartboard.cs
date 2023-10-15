@@ -6,25 +6,29 @@ namespace AimingTrainingRoom
 {
     public class Dartboard : ReactiveTarget
     {
-        [SerializeField] float baseSpeed = 1f;
-        [SerializeField] float difficulty = 1.0f;
-    
+        [SerializeField] float difficulty = 1.5f;
+        [SerializeField] float speed = 0f;
+        [SerializeField] float distanceToMove = 5.0f;
+        [SerializeField] private Tween moveTween;
         private void Start()
         {
-            StartCoroutine(StartMoving());
+            
         }
-
-        private IEnumerator StartMoving()
+        
+        public IEnumerator StartMoving(float level)
         {
-            float raiseDuration = 3.0f;
+            float raiseDuration = 0.3f;
          
             transform.DORotate(new Vector3(-90, 0, 0), raiseDuration, RotateMode.WorldAxisAdd);
             
             yield return new WaitForSeconds(raiseDuration);
             
-            float speed = baseSpeed * difficulty;
+            float levelFactor = 1.2f;
 
-            transform.DOMoveX(5, 2 / speed) // 2 is the duration
+            if (level > 1)
+                speed = difficulty * Mathf.Pow(levelFactor, (level));
+
+            moveTween = transform.DOMoveX(transform.position.x + distanceToMove, 2 / speed) // 2 is the duration
                 .SetLoops(-1, LoopType.Yoyo)
                 .SetEase(Ease.InOutSine);
         }
@@ -38,6 +42,7 @@ namespace AimingTrainingRoom
         }
         public IEnumerator Die()
         {
+            moveTween.Kill();
             this.transform.Rotate(75, 0, 0);
             yield return new WaitForSeconds(1.5f);
             

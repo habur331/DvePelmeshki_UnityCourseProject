@@ -54,8 +54,8 @@ namespace AimingTrainingRoom
         private void StartGame()
         {
             Debug.Log("Игра началась");
-            SetDartboardsGroup();
             level = 1;
+            SetDartboardsGroup();
             hitedDartboardsCount = 0;
         }
 
@@ -87,14 +87,16 @@ namespace AimingTrainingRoom
             for (int i = 0; i < numberDartboardsOnScene; i++)
             {
                 // Генерируем случайные координаты для новой мишени
-                float randomX = Random.Range(-15f, 15f);
+                float randomX = Random.Range(-10f, 10f);
                 float randomY = 1f;
                 float randomZ = Random.Range(-25f, -50f);
-
+            
                 // Создаем новую мишень в случайной позиции и добавляем ее в список
                 Vector3 randomPosition = new Vector3(randomX, randomY, randomZ);
                 var newDartboard = Instantiate(dartboardPrefab, randomPosition, Quaternion.Euler(0, 180, 0));
-                dartboards.Add(newDartboard.GetComponent<Dartboard>());
+                var dartboard = newDartboard.GetComponent<Dartboard>();
+                dartboard.StartCoroutine(dartboard.StartMoving(level));
+                dartboards.Add(dartboard);
             }
         }
 
