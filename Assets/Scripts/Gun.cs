@@ -27,47 +27,28 @@ public class Gun : MonoBehaviour
         _mainCamera = Camera.main;
         _normalZoom = _mainCamera!.fieldOfView;
     }
-
-    public void Update()
+    
+    public void Shoot(Transform originTransform)
     {
-        if (Mouse.IsLeftButtonClicked() && Time.time >= _nextTimeToFire)
+        if (Time.time >= _nextTimeToFire)
         {
-            Debug.Log("shot");
             _nextTimeToFire = Time.time + 1f / fireRate;
-            Shoot();
-        }
-        
-        Aim();
-    }
+            
+            particleSystem.Play();
 
-    private void Aim()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            _mainCamera.fieldOfView = zoomInAim;
-        }
+            var ray = new Ray(originTransform.position, originTransform.forward);
+            if (!Physics.Raycast(ray, out var hit)) return;
 
-        if (Input.GetMouseButtonUp(1))
-        {
-            _mainCamera.fieldOfView = _normalZoom;
-        }
-    }
-
-    private void Shoot()
-    {
-        particleSystem.Play();
-        var cameraTransform = _mainCamera.transform;
+            if (!hit.collider.CompareTag("Player"))
+            {
+                var mark = Instantiate(bulletHole, hit.point + (hit.normal * .01f), Quaternion.FromToRotation(Vector3.up, hit.normal));
+                mark.transform.parent = hit.transform;
+            }
         
-        var ray = new Ray(cameraTransform.position, cameraTransform.forward);
-        if (!Physics.Raycast(ray, out var hit)) return;
-        
-        Debug.Log(hit.transform.name);
-        var mark = Instantiate(bulletHole, hit.point + (hit.normal * .01f), Quaternion.FromToRotation(Vector3.up, hit.normal));
-        mark.transform.parent = hit.transform;
-        
-        if (IsObjectReactiveTarget(hit.transform.gameObject, out var reactiveTarget))
-        {
-            reactiveTarget.ReactToHit();
+            if (IsObjectReactiveTarget(hit.transform.gameObject, out var reactiveTarget))
+            {
+                reactiveTarget.ReactToHit();
+            }
         }
     }
     

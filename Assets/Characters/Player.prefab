@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 5271414547004566651}
   - component: {fileID: 7618445526971155430}
   - component: {fileID: 6394738553702981073}
+  - component: {fileID: 8769811255808394175}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -353,12 +354,12 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 1.5
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7618445526971155430
 MonoBehaviour:
@@ -374,6 +375,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   accelerationRate: 2
+  jumpHeight: 2
+  jumpDuration: 1
+  gravity: 7
 --- !u!114 &6394738553702981073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,6 +391,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSmooth: 5
+--- !u!114 &8769811255808394175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7010687848607348691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36b0e81d5cb99b40a763c3b2c2058a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomInAim: 20
 --- !u!1001 &2597500332692141547
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -395,6 +412,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1216210946621091386}
     m_Modifications:
+    - target: {fileID: 4435266425086786551, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
+      propertyPath: fireRate
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4435266425086786551, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
       propertyPath: bulletHole
       value: 

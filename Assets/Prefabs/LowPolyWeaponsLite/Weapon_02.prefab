@@ -10048,6 +10048,7 @@ Transform:
   - {fileID: 7959474724144931217}
   - {fileID: 560076185850846781}
   - {fileID: 7335416261190717683}
+  - {fileID: 54083775765950508}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -3.014, z: 0}
 --- !u!114 &9085189929629042449
@@ -10067,6 +10068,37 @@ MonoBehaviour:
   zoomInAim: 20
   bulletHole: {fileID: 5936750860081016305, guid: 27effd6d4275aa74984f7e9957240648, type: 3}
   particleSystem: {fileID: 7376618286890706958}
+--- !u!1 &4671173451510555516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 54083775765950508}
+  m_Layer: 0
+  m_Name: TargetPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &54083775765950508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4671173451510555516}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0816, z: 0.6499}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3961688900935326295}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5092530424030829901
 GameObject:
   m_ObjectHideFlags: 0
