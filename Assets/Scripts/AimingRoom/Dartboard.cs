@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using AimingRoom;
 using UnityEngine;
 using DG.Tweening;
 
@@ -32,11 +33,11 @@ namespace AimingTrainingRoom
                 .SetLoops(-1, LoopType.Yoyo)
                 .SetEase(Ease.InOutSine);
         }
-        public override void ReactToHit()
+        public override void ReactToHit(int damage = 0)
         {
             Debug.Log("Попал в мишень.");
             
-            FindObjectOfType<AimingTrainingScene>().MarkHitTarget(this);
+            FindObjectOfType<AimingRoom.AimingRoom>().MarkHitTarget(this);
             
             StartCoroutine(Die());
         }
@@ -46,7 +47,7 @@ namespace AimingTrainingRoom
             this.transform.Rotate(75, 0, 0);
             yield return new WaitForSeconds(1.5f);
             
-            FindObjectOfType<AimingTrainingScene>().RemoveDartboard(this);
+            FindObjectOfType<AimingRoom.AimingRoom>().RemoveDartboard(this);
             Destroy(this.gameObject);
         }
     }
