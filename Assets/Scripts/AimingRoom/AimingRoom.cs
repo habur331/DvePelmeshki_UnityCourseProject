@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
+using AimingTrainingRoom;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-namespace AimingTrainingRoom
+namespace AimingRoom
 {
-    public class AimingTrainingScene : MonoBehaviour
+    public class AimingRoom : MonoBehaviour
     {
         [SerializeField] private int level;
         [SerializeField] private GameObject dartboardPrefab;
@@ -105,5 +105,9 @@ namespace AimingTrainingRoom
             if (dartboards.Contains(target))
                 hitedDartboardsCount++;
         }
+    }
+
+    class AimingRoomImpl : AimingRoom
+    {
     }
 }
