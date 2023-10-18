@@ -7,6 +7,8 @@ using Unity.VisualScripting;
 
 public class Bot : MonoBehaviour
 {
+    [SerializeField]
+    private bool shootingEnable = true;
     [SerializeField] 
     private GameObject gunShootPoint;
     [SerializeField] 
@@ -24,7 +26,11 @@ public class Bot : MonoBehaviour
 
     private void Update()
     {
-        ShootAtPlayer();
+        if (shootingEnable)
+        {
+            ShootAtPlayer();
+        }
+        
         transform.DODynamicLookAt(_player.transform.position + playerOffset, 0.5f).SetEase(Ease.Linear);
     }
 

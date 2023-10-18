@@ -1238,9 +1238,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3982686549640634636}
   - component: {fileID: 3695635484730994760}
-  - component: {fileID: 3058358089922082981}
   - component: {fileID: 8525724139222291420}
-  - component: {fileID: 8054732925053604348}
+  - component: {fileID: 3058358089922082981}
+  - component: {fileID: 1597491962689582798}
   m_Layer: 0
   m_Name: Y Bot
   m_TagString: Untagged
@@ -1288,20 +1288,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3058358089922082981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4327546909099965366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52f8bb2fbddaba41a796b252c1ad81e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gunShootPoint: {fileID: 900161625589862446}
-  playerOffset: {x: 0, y: -1, z: 0}
 --- !u!64 &8525724139222291420
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1324,7 +1310,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 511c2cdc1c2a4834e82cf312d3637934, type: 2}
---- !u!114 &8054732925053604348
+--- !u!114 &3058358089922082981
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1333,9 +1319,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 4327546909099965366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48babbe4659cd8440a35b6d52793b66b, type: 3}
+  m_Script: {fileID: 11500000, guid: e52f8bb2fbddaba41a796b252c1ad81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootingEnable: 1
+  gunShootPoint: {fileID: 900161625589862446}
+  playerOffset: {x: 0, y: -1, z: 0}
+--- !u!114 &1597491962689582798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4327546909099965366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7eee60df0881b42bf73bd2324d94f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!1 &4513046442428542866
 GameObject:
   m_ObjectHideFlags: 0

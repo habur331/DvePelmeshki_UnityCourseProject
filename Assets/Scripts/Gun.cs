@@ -10,7 +10,7 @@ using Object = UnityEngine.Object;
 public class Gun : MonoBehaviour
 {
     [Header("Parameters")]
-    [SerializeField] private float damage = 10f;
+    [SerializeField] private int damage = 10;
     [SerializeField] private float fireRate = 15f;
     [SerializeField] private float zoomInAim = 20;
     private float _normalZoom;
@@ -47,7 +47,7 @@ public class Gun : MonoBehaviour
         
             if (IsObjectReactiveTarget(hit.transform.gameObject, out var reactiveTarget))
             {
-                reactiveTarget.ReactToHit();
+                reactiveTarget.ReactToHit(damage);
             }
         }
     }
