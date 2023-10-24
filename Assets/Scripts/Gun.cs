@@ -1,49 +1,83 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using JetBrains.Annotations;
 using Static_Classes;
+using Unity.VisualScripting;
 using UnityEditor.Search;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
 
 public class Gun : MonoBehaviour
 {
-    [Header("Parameters")]
+    [Header("Shooting")]
     [SerializeField] private int damage = 10;
     [SerializeField] private float fireRate = 15f;
     [SerializeField] private float zoomInAim = 20;
-    private float _normalZoom;
     
-    [Header("Effects")]
-    [SerializeField] private GameObject bulletHole;
-    [SerializeField] private new ParticleSystem particleSystem;
+    [Space]
+    [Header("Reloading")]
+    [SerializeField] private int magazineSize = 5;
+    [SerializeField] private float timeToReload = 2f;
+    
+    [Space]
+    [Header("Visual effects")]
+    [SerializeField] [CanBeNull] private GameObject bulletMark;
+    [SerializeField] [CanBeNull] private new ParticleSystem particleSystem;
+    [SerializeField] [CanBeNull] private new AudioSource audioSource;
 
+    [Space]
+    [Header("Audio effects")]
+    [SerializeField] [CanBeNull] private AudioClip shootSound;
+    [SerializeField] [CanBeNull] private AudioClip startReloadSound;
+    [SerializeField] [CanBeNull] private AudioClip endReloadSound;
+
+    [DoNotSerialize] public UnityEvent reloadingEvent;
+    
+    public int CurrentMagazineSize { get; protected set; }
+    public int MagazineSize => magazineSize;
+    
     private Camera _mainCamera = null;
     private float _nextTimeToFire = 0f;
+    private float _normalZoom;
+    private bool _reloading = false;
+    private bool MustReload => CurrentMagazineSize == 0;
+    private bool CanShoot => Time.time >= _nextTimeToFire && !MustReload && !_reloading;
     
     public void Start()
     {
+        if(audioSource is null)
+            TryGetComponent(out audioSource);
+        
         _mainCamera = Camera.main;
         _normalZoom = _mainCamera!.fieldOfView;
+        CurrentMagazineSize = magazineSize;
     }
     
     public void Shoot(Transform originTransform)
     {
-        if (Time.time >= _nextTimeToFire)
+        if (MustReload)
+        {
+            Reload();
+        }
+        
+        if (CanShoot)
         {
             _nextTimeToFire = Time.time + 1f / fireRate;
+            CurrentMagazineSize--;
             
-            particleSystem.Play();
+            // ReSharper disable once Unity.NoNullPropagation
+            particleSystem?.Play();
+            // ReSharper disable once Unity.NoNullPropagation
+            if(shootSound != null) audioSource?.PlayOneShot(shootSound);
 
             var ray = new Ray(originTransform.position, originTransform.forward);
             if (!Physics.Raycast(ray, out var hit)) return;
 
-            if (!hit.collider.CompareTag("Player"))
-            {
-                var mark = Instantiate(bulletHole, hit.point + (hit.normal * .01f), Quaternion.FromToRotation(Vector3.up, hit.normal));
-                mark.transform.parent = hit.transform;
-            }
+            PlaceBulletMark(hit);
         
             if (IsObjectReactiveTarget(hit.transform.gameObject, out var reactiveTarget))
             {
@@ -51,7 +85,46 @@ public class Gun : MonoBehaviour
             }
         }
     }
+
+    public void Reload()
+    {
+        if (_reloading) return;
+        
+        reloadingEvent.Invoke();
+        StartCoroutine(ReloadCoroutine());
+    }
     
+    [SuppressMessage("ReSharper", "Unity.NoNullPropagation")]
+    private IEnumerator ReloadCoroutine()
+    {
+        _reloading = true;
+        _nextTimeToFire = Time.time + timeToReload;
+        
+        yield return null;
+        if(startReloadSound != null) audioSource?.PlayOneShot(startReloadSound, 2.5f);
+
+        yield return new WaitForSeconds(timeToReload);
+
+        if (endReloadSound != null)
+        {
+            audioSource?.PlayOneShot(endReloadSound);
+            yield return new WaitForSeconds(endReloadSound.length);
+        }
+        
+        CurrentMagazineSize = magazineSize;
+        _reloading = false;
+    }
+
+    private void PlaceBulletMark(RaycastHit hit)
+    {
+        if(ReferenceEquals(bulletMark, null)) return;
+            
+        if (hit.collider.CompareTag("Player")) return;
+        
+        var mark = Instantiate(bulletMark, hit.point + (hit.normal * .01f), Quaternion.FromToRotation(Vector3.up, hit.normal));
+        mark.transform.parent = hit.transform;
+    }
+
     private bool IsObjectReactiveTarget(GameObject @object, out ReactiveTarget reactiveTarget)
     {
         reactiveTarget = @object.GetComponent<ReactiveTarget>();

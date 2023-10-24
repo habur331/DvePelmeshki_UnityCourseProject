@@ -1322,7 +1322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e52f8bb2fbddaba41a796b252c1ad81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingEnable: 1
+  shootingEnable: 0
   gunShootPoint: {fileID: 900161625589862446}
   playerOffset: {x: 0, y: -1, z: 0}
 --- !u!114 &1597491962689582798
@@ -2519,6 +2519,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShootPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 9085189929629042449, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
+      propertyPath: bulletMark
+      value: 
+      objectReference: {fileID: 5936750860081016305, guid: 27effd6d4275aa74984f7e9957240648, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
