@@ -39,6 +39,7 @@ public class Gun : MonoBehaviour
     
     public int CurrentMagazineSize { get; protected set; }
     public int MagazineSize => magazineSize;
+    public bool IsReloading => _reloading;
     
     private Camera _mainCamera = null;
     private float _nextTimeToFire = 0f;

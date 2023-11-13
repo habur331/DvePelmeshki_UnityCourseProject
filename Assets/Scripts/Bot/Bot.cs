@@ -1,22 +1,28 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using Unity.VisualScripting;
 
 public class Bot : MonoBehaviour
 {
     [SerializeField]
     private bool shootingEnable = true;
-    [SerializeField] 
+    [SerializeField]
     private GameObject gunShootPoint;
-    [SerializeField] 
+    [SerializeField]
     private Vector3 playerOffset;
 
     private Gun _currentGun;
     private GameObject _player;
     
+    private bool _isShooting = false;
+    private bool CanShoot => shootingEnable && !_currentGun.IsReloading;
+
+    [SerializeField]
+    private float delayBeforeShooting = 0.1f; 
+    [SerializeField]
+    private int shotsInBurst = 3;
+    [SerializeField]
+    private float timeBetweenShots = 0.5f; 
 
     private void Start()
     {
@@ -26,36 +32,58 @@ public class Bot : MonoBehaviour
 
     private void Update()
     {
-        if (shootingEnable)
+        if (CanShoot)
         {
-            ShootAtPlayer();
+            if (IsPlayerInFront())
+            {
+                if (!_isShooting)
+                {
+                    // Start shooting after the delay
+                    _isShooting = true;
+                    Invoke(nameof(StartShooting), delayBeforeShooting);
+                }
+            }
+            else
+            {
+                // Stop shooting if the player is not in front
+                //isShooting = false;
+                //CancelInvoke(nameof(StartShooting));
+            }
         }
-        
+
         transform.DODynamicLookAt(_player.transform.position + playerOffset, 0.5f).SetEase(Ease.Linear);
     }
 
-    private void OnDestroy()
+    private void StartShooting()
     {
-        this.DOKill();
+        StartCoroutine(ShootAtPlayer());
     }
 
-    private void ShootAtPlayer()
+    private IEnumerator ShootAtPlayer()
     {
-        if (IsPlayerInFront())
+        for (var i = 0; i < shotsInBurst; i++)
         {
+            yield return new WaitForSeconds(timeBetweenShots);
             _currentGun.Shoot(gunShootPoint.transform);
         }
+
+        _isShooting = false;
     }
 
     private bool IsPlayerInFront()
     {
         var ray = new Ray(gunShootPoint.transform.position, gunShootPoint.transform.forward);
-        return Physics.Raycast(ray, out var hit) && hit.collider.CompareTag("Player");;
+        return Physics.Raycast(ray, out var hit) && hit.collider.CompareTag("Player");
     }
     
+    private void OnDestroy()
+    {
+        this.DOKill();
+    }
+
     /*private void OnDrawGizmos()
-   {
-       Gizmos.color = Color.red;
-       Gizmos.DrawLine(gunShootPoint.transform.position, gunShootPoint.transform.forward * 50);
-   }*/
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(gunShootPoint.transform.position, gunShootPoint.transform.forward * 50);
+    }*/
 }
