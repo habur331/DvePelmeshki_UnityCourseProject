@@ -8,6 +8,8 @@ public class PlayerShoot : MonoBehaviour
     [Header("Parameters")]
     [SerializeField] private float zoomInAim = 20;
 
+    public Gun CurrentGun => _currentGun;
+
     private Camera _mainCamera = null;
     private float _normalZoom;
     private Gun _currentGun = null;
