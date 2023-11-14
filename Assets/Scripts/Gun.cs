@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 public class Gun : MonoBehaviour
 {
@@ -17,6 +18,23 @@ public class Gun : MonoBehaviour
     [SerializeField] private int damage = 10;
     [SerializeField] private float fireRate = 15f;
     [SerializeField] private float zoomInAim = 20;
+
+    [Space]
+    [Header("Recoil")]
+    [SerializeField] private bool enableRecoil = false;
+    [SerializeField] private GameObject shootingCharacter;
+    
+    [Space]
+    [SerializeField] private float recoilX;
+    [SerializeField] private float recoilY;
+
+    [Space]
+    [SerializeField] private float aimRecoilX;
+    [SerializeField] private float aimRecoilY;
+
+    [Space]
+    [SerializeField] private float snappiness;
+    [SerializeField] private float returnSpeed;
     
     [Space]
     [Header("Reloading")]
@@ -45,10 +63,16 @@ public class Gun : MonoBehaviour
     private float _nextTimeToFire = 0f;
     private float _normalZoom;
     private bool _reloading = false;
+    
+    private Vector3 currentRotation;
+    private Vector3 targetRotation;
+    
+
+
     private bool MustReload => CurrentMagazineSize == 0;
     private bool CanShoot => Time.time >= _nextTimeToFire && !MustReload && !_reloading;
     
-    public void Start()
+    private void Start()
     {
         if(audioSource is null)
             TryGetComponent(out audioSource);
@@ -57,7 +81,14 @@ public class Gun : MonoBehaviour
         _normalZoom = _mainCamera!.fieldOfView;
         CurrentMagazineSize = magazineSize;
     }
-    
+
+    private void Update()
+    {
+        targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, returnSpeed * Time.deltaTime);
+        currentRotation = Vector3.Slerp(currentRotation, targetRotation, snappiness * Time.fixedDeltaTime);
+        _mainCamera.gameObject.transform.localRotation = Quaternion.Euler(currentRotation);
+    }
+
     public void Shoot(Transform originTransform)
     {
         if (MustReload)
@@ -84,7 +115,14 @@ public class Gun : MonoBehaviour
             {
                 reactiveTarget.ReactToHit(damage);
             }
+            
+            ApplyRecoil();
         }
+    }
+    
+    private void ApplyRecoil()
+    {
+        targetRotation += new Vector3(recoilX, Random.Range(-recoilY, recoilY), currentRotation.z);
     }
 
     public void Reload()
