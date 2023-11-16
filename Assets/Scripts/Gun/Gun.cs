@@ -39,7 +39,7 @@ public class Gun : MonoBehaviour
     [Header("Visual effects")]
     [SerializeField] [CanBeNull] private GameObject bulletMark;
     [SerializeField] [CanBeNull] private new ParticleSystem particleSystem;
-    [SerializeField] [CanBeNull] private new AudioSource audioSource;
+    [SerializeField] [CanBeNull] private AudioSource audioSource;
 
     [Space]
     [Header("Audio effects")]
@@ -120,7 +120,7 @@ public class Gun : MonoBehaviour
             if (randomRecoil)
                 direction = Quaternion.Euler(GetRandomRecoil()) * direction;
             
-            var ray = new Ray(originTransform.position,  direction);
+            var ray = new Ray(originTransform.position, direction);
             if (!Physics.Raycast(ray, out var hit)) return;
 
             PlaceBulletMark(hit);
@@ -147,7 +147,7 @@ public class Gun : MonoBehaviour
     {
         var randomX = UnityEngine.Random.Range(-randomRecoilBoundaries.x, randomRecoilBoundaries.x);
         var randomY = UnityEngine.Random.Range(-randomRecoilBoundaries.y, randomRecoilBoundaries.y);
-        return new Vector3(randomX, randomY, 0); // Используйте случайные значения для изменения направления луча
+        return new Vector3(randomX, randomY, 0);
     }
 
     private IEnumerator ResetRecoil()
