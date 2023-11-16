@@ -5,6 +5,8 @@ using System.Linq;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Bot))]
 public class BotHealth : MonoBehaviour
 {
     [SerializeField] private float health = 100;
@@ -18,14 +20,27 @@ public class BotHealth : MonoBehaviour
     private float _currentHealth;
 
     private Bot _bot;
+    private Animator _animator;
     private IReadOnlyCollection<BotBodyPart> _bodyParts;
+    private IReadOnlyCollection<Rigidbody> _rigidbodies;
+    private IReadOnlyCollection<Collider> _colliders;
     private IReadOnlyDictionary<BotBodyPartEnum, float> _damageMultipliers;
 
     private void Start()
     {
-        _bot = GetComponent<Bot>();
         _currentHealth = health;
+        _bot = GetComponent<Bot>();
+        _animator = GetComponent<Animator>();
+        _rigidbodies = GetComponentsInChildren<Rigidbody>();
         _bodyParts = GetComponentsInChildren<BotBodyPart>();
+        _colliders = GetComponentsInChildren<Collider>();
+        
+        foreach (var rigidbody in _rigidbodies)
+        {
+            rigidbody.isKinematic = true;
+            rigidbody.useGravity = false;
+        }
+        
         foreach (var botBodyPart in _bodyParts)
         {
             botBodyPart.hit.AddListener(ReactToHit);
@@ -53,6 +68,24 @@ public class BotHealth : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        _bot.StopAllCoroutines();
+        _bot.enabled = false;
+        Destroy(_bot.CurrentGun.gameObject);
+        
+        _animator.enabled = false;
+        foreach (var rigidbody in _rigidbodies)
+        {
+            rigidbody.isKinematic = false;
+            rigidbody.useGravity = true;
+        }
+        foreach (var botBodyPart in _bodyParts)
+        {
+            botBodyPart.enabled = false;
+        }
+
+        /*foreach (var collider in _colliders)
+        {
+            collider.enabled = false;
+        }*/
     }
 }

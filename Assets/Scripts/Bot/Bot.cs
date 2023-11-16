@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
@@ -11,18 +12,20 @@ public class Bot : MonoBehaviour
     [SerializeField]
     private Vector3 playerOffset;
 
-    private Gun _currentGun;
-    private GameObject _player;
-    
-    private bool _isShooting = false;
-    private bool CanShoot => shootingEnable && !_currentGun.IsReloading;
-
     [SerializeField]
     private float delayBeforeShooting = 0.1f; 
     [SerializeField]
     private int shotsInBurst = 3;
     [SerializeField]
-    private float timeBetweenShots = 0.5f; 
+    private float timeBetweenShots = 0.5f;
+
+    public Gun CurrentGun => _currentGun;
+    
+    private Gun _currentGun;
+    private GameObject _player;
+    
+    private bool _isShooting = false;
+    private bool CanShoot => shootingEnable && !_currentGun.IsReloading;
 
     private void Start()
     {
@@ -64,7 +67,8 @@ public class Bot : MonoBehaviour
         for (var i = 0; i < shotsInBurst; i++)
         {
             yield return new WaitForSeconds(timeBetweenShots);
-            _currentGun.Shoot(gunShootPoint.transform);
+            if(_currentGun != null)
+                _currentGun.Shoot(gunShootPoint.transform);
         }
 
         _isShooting = false;
@@ -78,7 +82,14 @@ public class Bot : MonoBehaviour
     
     private void OnDestroy()
     {
+        StopAllCoroutines();
         this.DOKill();
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(ShootAtPlayer());
+        StopAllCoroutines();
     }
 
     /*private void OnDrawGizmos()

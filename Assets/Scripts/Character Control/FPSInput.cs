@@ -42,7 +42,6 @@ public class FPSInput : MonoBehaviour
             motion.z *= accelerationRate;
         }
         
-        Debug.Log(_characterController.isGrounded);
         if (_characterController.isGrounded)
         {
             isJumping = false;
