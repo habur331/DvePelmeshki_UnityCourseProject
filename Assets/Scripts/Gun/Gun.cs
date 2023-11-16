@@ -10,38 +10,40 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
+using Random = System.Random;
 
 public class Gun : MonoBehaviour
 {
     [Header("Shooting")]
     [SerializeField] private int damage = 10;
-
     [SerializeField] private float fireRate = 15f;
     [SerializeField] private float zoomInAim = 20;
 
     [Space]
     [Header("Recoil")]
+    [SerializeField] private bool randomRecoil = false;
+    
+    [Header("Random Recoil")]
+    [SerializeField] private Vector2 randomRecoilBoundaries;
+    
+    [Header("Pattern Recoil")]
     [SerializeField] private float timeToResetRecoil = 0.5f;
-
     [SerializeField] private Vector2[] recoilPattern = { Vector2.zero };
 
     [Space]
     [Header("Reloading")]
     [SerializeField] private int magazineSize = 5;
-
     [SerializeField] private float timeToReload = 2f;
 
     [Space]
     [Header("Visual effects")]
     [SerializeField] [CanBeNull] private GameObject bulletMark;
-
     [SerializeField] [CanBeNull] private new ParticleSystem particleSystem;
     [SerializeField] [CanBeNull] private new AudioSource audioSource;
 
     [Space]
     [Header("Audio effects")]
     [SerializeField] [CanBeNull] private AudioClip shootSound;
-
     [SerializeField] [CanBeNull] private AudioClip startReloadSound;
     [SerializeField] [CanBeNull] private AudioClip endReloadSound;
 
@@ -52,6 +54,7 @@ public class Gun : MonoBehaviour
     public bool IsReloading => _reloading;
 
 
+    private Random _random;
     private Camera _mainCamera = null;
     private MouseLook _mouseLook;
     private float _nextTimeToFire = 0f;
@@ -73,22 +76,27 @@ public class Gun : MonoBehaviour
         _mainCamera = Camera.main;
         _mouseLook = _mainCamera!.GetComponent<MouseLook>();
         _normalZoom = _mainCamera!.fieldOfView;
-        _recoilEnumerator = new RecoilEnumerator(recoilPattern);
         CurrentMagazineSize = magazineSize;
+        
+        if(!randomRecoil)
+            _recoilEnumerator = new RecoilEnumerator(recoilPattern);
     }
 
     private void Update()
     {
-        if (_shootedLastFrame && _recoilResetCoroutine is null && _recoilEnumerator.Started)
-            _recoilResetCoroutine = StartCoroutine(ResetRecoil());
-
-        if (_shootedLastFrame && _recoilResetCoroutine is not null)
+        if (!randomRecoil)
         {
-            StopCoroutine(_recoilResetCoroutine);
-            _recoilResetCoroutine = StartCoroutine(ResetRecoil());
-        }
+            if (_shootedLastFrame && _recoilResetCoroutine is null && _recoilEnumerator.Started)
+                _recoilResetCoroutine = StartCoroutine(ResetRecoil());
 
-        _shootedLastFrame = false;
+            if (_shootedLastFrame && _recoilResetCoroutine is not null)
+            {
+                StopCoroutine(_recoilResetCoroutine);
+                _recoilResetCoroutine = StartCoroutine(ResetRecoil());
+            }
+
+            _shootedLastFrame = false;
+        }
     }
 
     public void Shoot(Transform originTransform)
@@ -108,7 +116,11 @@ public class Gun : MonoBehaviour
             // ReSharper disable once Unity.NoNullPropagation
             if (shootSound != null) audioSource?.PlayOneShot(shootSound);
 
-            var ray = new Ray(originTransform.position, originTransform.forward);
+            var direction = originTransform.forward;
+            if (randomRecoil)
+                direction = Quaternion.Euler(GetRandomRecoil()) * direction;
+            
+            var ray = new Ray(originTransform.position,  direction);
             if (!Physics.Raycast(ray, out var hit)) return;
 
             PlaceBulletMark(hit);
@@ -118,15 +130,24 @@ public class Gun : MonoBehaviour
                 reactiveTarget.ReactToHit(damage);
             }
 
-            ApplyRecoil();
+            ApplyPatternRecoil();
             _shootedLastFrame = true;
         }
     }
 
-    private void ApplyRecoil()
+    private void ApplyPatternRecoil()
     {
+        if (randomRecoil) return;
+        
         _recoilEnumerator.MoveNext();
         _mouseLook.ApplyRecoil(_recoilEnumerator.Current);
+    }
+
+    private Vector3 GetRandomRecoil()
+    {
+        var randomX = UnityEngine.Random.Range(-randomRecoilBoundaries.x, randomRecoilBoundaries.x);
+        var randomY = UnityEngine.Random.Range(-randomRecoilBoundaries.y, randomRecoilBoundaries.y);
+        return new Vector3(randomX, randomY, 0); // Используйте случайные значения для изменения направления луча
     }
 
     private IEnumerator ResetRecoil()
