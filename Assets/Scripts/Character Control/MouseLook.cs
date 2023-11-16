@@ -15,7 +15,7 @@ public class MouseLook : MonoBehaviour
     [SerializeField] private float mouseSmooth;
 
     private float _xRotation;
-    private Vector2? _recoil;
+    private Vector2 _recoil = Vector2.zero;
 
     private void Start()
     {
@@ -24,8 +24,8 @@ public class MouseLook : MonoBehaviour
 
     private void Update()
     {
-        Rotate(Mouse.AxisInput(mouseSmooth) + (_recoil ?? new Vector2(0, 0)));
-        _recoil = null;
+        Rotate(Mouse.AxisInput(mouseSmooth) + _recoil);
+        _recoil = Vector2.zero;;
     }
 
     private void Rotate(Vector2 input)

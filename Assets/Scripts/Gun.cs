@@ -123,14 +123,15 @@ public class Gun : MonoBehaviour
         if(ReferenceEquals(bulletMark, null)) return;
             
         if (hit.collider.CompareTag("Player")) return;
+        if (hit.collider.CompareTag("HumanoidEnemy")) return;
         
         var mark = Instantiate(bulletMark, hit.point + (hit.normal * .01f), Quaternion.FromToRotation(Vector3.up, hit.normal));
         mark.transform.parent = hit.transform;
     }
 
-    private bool IsObjectReactiveTarget(GameObject @object, out ReactiveTarget reactiveTarget)
+    private bool IsObjectReactiveTarget(GameObject @object, out IReactiveTarget reactiveTarget)
     {
-        reactiveTarget = @object.GetComponent<ReactiveTarget>();
+        reactiveTarget = @object.GetComponent<IReactiveTarget>();
         return reactiveTarget is not null;
     }
 }

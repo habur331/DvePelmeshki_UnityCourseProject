@@ -5,7 +5,7 @@ using DG.Tweening;
 
 namespace AimingTrainingRoom
 {
-    public class Dartboard : ReactiveTarget
+    public class Dartboard : MonoBehaviour,  IReactiveTarget
     {
         [SerializeField] float difficulty = 1.5f;
         [SerializeField] float speed = 0f;
@@ -33,7 +33,7 @@ namespace AimingTrainingRoom
                 .SetLoops(-1, LoopType.Yoyo)
                 .SetEase(Ease.InOutSine);
         }
-        public override void ReactToHit(int damage = 0)
+        public void ReactToHit(int damage = 0)
         {
             Debug.Log("Попал в мишень.");
             

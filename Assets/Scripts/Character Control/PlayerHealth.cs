@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class PlayerHealth : ReactiveTarget
+public class PlayerHealth : MonoBehaviour, IReactiveTarget
 {
     [SerializeField] private int health = 100;
     private int _currentHealth;
     [SerializeField] private GameObject player;
     [SerializeField] private Vector3 playerSpawnPosition;
+
     void Start()
     {
         player = GameObject.FindGameObjectsWithTag("Player")[0];
@@ -17,20 +18,21 @@ public class PlayerHealth : ReactiveTarget
         _currentHealth = health;
     }
 
-    public override void ReactToHit(int damage = 0)
+    public void ReactToHit(int damage = 0)
     {
         if (damage < 0)
             throw new InvalidOperationException();
-        
+
         _currentHealth -= damage;
-        
+
         if (_currentHealth <= 0)
-           Die();
+            Die();
     }
+
     public void Die()
     {
         Debug.Log("You are dying");
-        
+
         transform.DOMove(playerSpawnPosition, 0.000001f);
         _currentHealth = health;
     }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1359400832849815695}
   m_Layer: 0
   m_Name: mixamorig:RightHandPinky3
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1780712488250118223}
   m_Layer: 0
   m_Name: mixamorig:RightToeBase
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 6828065240883095354}
   m_Layer: 0
   m_Name: mixamorig:RightHandIndex4
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 4604616966164516274}
   m_Layer: 0
   m_Name: mixamorig:RightHandRing3
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,9 +136,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6203885813517858846}
+  - component: {fileID: 468453766573390884}
+  - component: {fileID: 6679894783549428433}
   m_Layer: 0
   m_Name: mixamorig:LeftForeArm
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,6 +161,43 @@ Transform:
   - {fileID: 7706650696578339620}
   m_Father: {fileID: 6958705550856443359}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &468453766573390884
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433063478398636972}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.09100699, y: 0.271944, z: 0.10682963}
+  m_Center: {x: 0.01063667, y: 0.14387037, z: 0.002336535}
+--- !u!114 &6679894783549428433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433063478398636972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f123b0a610fce9545ab069213bf1ba7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 2
+  Hitted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &515833394830455711
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,9 +207,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7684148779581954805}
+  - component: {fileID: 931677884169473872}
+  - component: {fileID: 9216825327699269114}
   m_Layer: 0
   m_Name: mixamorig:Neck
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,6 +232,45 @@ Transform:
   - {fileID: 7001349917554471823}
   m_Father: {fileID: 3880707931940804232}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &931677884169473872
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515833394830455711}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.08554947
+  m_Height: 0.2508833
+  m_Direction: 1
+  m_Center: {x: 0.0021226406, y: 0.17297862, z: 0.040243965}
+--- !u!114 &9216825327699269114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515833394830455711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f123b0a610fce9545ab069213bf1ba7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 0
+  Hitted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &570103602406358523
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +282,7 @@ GameObject:
   - component: {fileID: 4365923807085470329}
   m_Layer: 0
   m_Name: mixamorig:LeftHandIndex4
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -233,7 +313,7 @@ GameObject:
   - component: {fileID: 4512315400749947729}
   m_Layer: 0
   m_Name: mixamorig:LeftHandThumb3
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -265,7 +345,7 @@ GameObject:
   - component: {fileID: 3098993819945711613}
   m_Layer: 0
   m_Name: mixamorig:RightHandThumb3
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -297,7 +377,7 @@ GameObject:
   - component: {fileID: 4777656069809248485}
   m_Layer: 0
   m_Name: mixamorig:LeftHandRing4
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -328,7 +408,7 @@ GameObject:
   - component: {fileID: 8535057982891298213}
   m_Layer: 0
   m_Name: mixamorig:RightHandIndex3
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -361,7 +441,7 @@ GameObject:
   - component: {fileID: 2548874694243579993}
   m_Layer: 0
   m_Name: Alpha_Joints
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -495,9 +575,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7706650696578339620}
+  - component: {fileID: 8806785604798087782}
+  - component: {fileID: 2411011740033161410}
   m_Layer: 0
   m_Name: mixamorig:LeftHand
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -522,6 +604,43 @@ Transform:
   - {fileID: 8557350878942464689}
   m_Father: {fileID: 6203885813517858846}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8806785604798087782
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057958989428002603}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.09301924, y: 0.22300655, z: 0.102933556}
+  m_Center: {x: 0.00825497, y: 0.11940166, z: 0.00038849594}
+--- !u!114 &2411011740033161410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057958989428002603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f123b0a610fce9545ab069213bf1ba7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 2
+  Hitted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1147942958973114682
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,7 +652,7 @@ GameObject:
   - component: {fileID: 2501795870046899467}
   m_Layer: 0
   m_Name: mixamorig:LeftHandIndex1
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -565,7 +684,7 @@ GameObject:
   - component: {fileID: 7723871584389191352}
   m_Layer: 0
   m_Name: mixamorig:LeftHandRing1
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -597,7 +716,7 @@ GameObject:
   - component: {fileID: 7425536560735757923}
   m_Layer: 0
   m_Name: mixamorig:RightHandRing2
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -627,9 +746,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2988786961085954351}
+  - component: {fileID: 1721427221076007965}
+  - component: {fileID: 9069221384457327157}
   m_Layer: 0
   m_Name: mixamorig:RightHand
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -654,6 +775,43 @@ Transform:
   - {fileID: 5041199350578745881}
   m_Father: {fileID: 1395200836813157199}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1721427221076007965
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540301906801667046}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.09301924, y: 0.22300655, z: 0.102933556}
+  m_Center: {x: 0.00825497, y: 0.11940166, z: 0.00038849594}
+--- !u!114 &9069221384457327157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540301906801667046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f123b0a610fce9545ab069213bf1ba7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 2
+  Hitted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1681822277636261098
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,7 +823,7 @@ GameObject:
   - component: {fileID: 1250215614984390163}
   m_Layer: 0
   m_Name: mixamorig:LeftShoulder
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -697,7 +855,7 @@ GameObject:
   - component: {fileID: 5219818759213053793}
   m_Layer: 0
   m_Name: mixamorig:HeadTop_End
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -728,7 +886,7 @@ GameObject:
   - component: {fileID: 7552483308428450283}
   m_Layer: 0
   m_Name: mixamorig:RightHandMiddle2
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -760,7 +918,7 @@ GameObject:
   - component: {fileID: 2080964893016498426}
   m_Layer: 0
   m_Name: mixamorig:LeftHandMiddle3
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -790,9 +948,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6048690166153060410}
+  - component: {fileID: 6100283826704954833}
+  - component: {fileID: 5746714539536848916}
   m_Layer: 0
   m_Name: mixamorig:LeftLeg
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -813,6 +973,43 @@ Transform:
   - {fileID: 1177533594305648854}
   m_Father: {fileID: 1390356385903360228}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6100283826704954833
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914707231236654311}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.11837611, y: 0.39558494, z: 0.15681116}
+  m_Center: {x: 0.004793916, y: 0.21214424, z: -0.0042039678}
+--- !u!114 &5746714539536848916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914707231236654311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f123b0a610fce9545ab069213bf1ba7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 3
+  Hitted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1962785013562091939
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,7 +1021,7 @@ GameObject:
   - component: {fileID: 225257561114001132}
   m_Layer: 0
   m_Name: mixamorig:RightHandIndex2
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -854,9 +1051,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1390356385903360228}
+  - component: {fileID: 3901755799558835281}
+  - component: {fileID: 208096402340065401}
   m_Layer: 0
   m_Name: mixamorig:LeftUpLeg
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -877,6 +1076,43 @@ Transform:
   - {fileID: 6048690166153060410}
   m_Father: {fileID: 8869006708064649624}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3901755799558835281
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966637980317846730}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.14001667, y: 0.4123646, z: 0.18056919}
+  m_Center: {x: 0.008599185, y: 0.203386, z: -0.007019087}
+--- !u!114 &208096402340065401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966637980317846730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f123b0a610fce9545ab069213bf1ba7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 3
+  Hitted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2196250917186724705
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,7 +1124,7 @@ GameObject:
   - component: {fileID: 1191729699589414997}
   m_Layer: 0
   m_Name: mixamorig:RightHandRing4
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -919,7 +1155,7 @@ GameObject:
   - component: {fileID: 6255778516803868892}
   m_Layer: 0
   m_Name: mixamorig:LeftHandIndex3
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -951,7 +1187,7 @@ GameObject:
   - component: {fileID: 7585042627593909833}
   m_Layer: 0
   m_Name: mixamorig:LeftToeBase
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -981,9 +1217,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9186766320254480907}
+  - component: {fileID: 1377723308186170754}
+  - component: {fileID: 8753420689131517874}
   m_Layer: 0
   m_Name: mixamorig:Spine
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1004,6 +1242,43 @@ Transform:
   - {fileID: 2332951712200386275}
   m_Father: {fileID: 8869006708064649624}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1377723308186170754
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2699501996161100380}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.33, y: 0.11148666, z: 0.2914707}
+  m_Center: {x: 9.740168e-13, y: -0.058205742, z: 0.0052100043}
+--- !u!114 &8753420689131517874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2699501996161100380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f123b0a610fce9545ab069213bf1ba7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 1
+  Hitted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2814641769042081388
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,7 +1290,7 @@ GameObject:
   - component: {fileID: 2700014642434660564}
   m_Layer: 0
   m_Name: mixamorig:LeftHandRing2
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1047,7 +1322,7 @@ GameObject:
   - component: {fileID: 4749811633262608449}
   m_Layer: 0
   m_Name: mixamorig:RightHandIndex1
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1079,7 +1354,7 @@ GameObject:
   - component: {fileID: 2065475091928662013}
   m_Layer: 0
   m_Name: mixamorig:RightHandMiddle3
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1111,7 +1386,7 @@ GameObject:
   - component: {fileID: 2327778493761949327}
   m_Layer: 0
   m_Name: mixamorig:RightHandPinky1
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1143,7 +1418,7 @@ GameObject:
   - component: {fileID: 5977206838492413818}
   m_Layer: 0
   m_Name: mixamorig:RightShoulder
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1173,9 +1448,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7172646383026100706}
+  - component: {fileID: 2141640972002461493}
+  - component: {fileID: 5052418354760810437}
   m_Layer: 0
   m_Name: mixamorig:RightArm
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1196,6 +1473,43 @@ Transform:
   - {fileID: 1395200836813157199}
   m_Father: {fileID: 5977206838492413818}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2141640972002461493
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3661641271407690913}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.091006994, y: 0.24513839, z: 0.10682965}
+  m_Center: {x: 0.01063579, y: 0.15403754, z: 0.002343863}
+--- !u!114 &5052418354760810437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3661641271407690913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f123b0a610fce9545ab069213bf1ba7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 2
+  Hitted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3850820185728003783
 GameObject:
   m_ObjectHideFlags: 0
@@ -1207,7 +1521,7 @@ GameObject:
   - component: {fileID: 8809745101483669947}
   m_Layer: 0
   m_Name: mixamorig:RightHandPinky2
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1243,7 +1557,7 @@ GameObject:
   - component: {fileID: 1597491962689582798}
   m_Layer: 0
   m_Name: Y Bot
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1305,7 +1619,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -1341,6 +1655,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  headDamageMultiplier: 1
+  chestDamageMultiplier: 1
+  armDamageMultiplier: 1
+  legDamageMultiplier: 1
 --- !u!1 &4513046442428542866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,7 +1670,7 @@ GameObject:
   - component: {fileID: 3715166018362959279}
   m_Layer: 0
   m_Name: mixamorig:RightHandThumb4
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1383,7 +1701,7 @@ GameObject:
   - component: {fileID: 8869006708064649624}
   m_Layer: 0
   m_Name: mixamorig:Hips
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1415,9 +1733,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4088934514662940827}
+  - component: {fileID: 7586273783376042758}
+  - component: {fileID: 5432935374895749866}
   m_Layer: 0
   m_Name: mixamorig:RightFoot
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1438,6 +1758,43 @@ Transform:
   - {fileID: 1780712488250118223}
   m_Father: {fileID: 8992908791214573629}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7586273783376042758
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4998390269946302068}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.099405184, y: 0.27797326, z: 0.084076814}
+  m_Center: {x: -0.0059407563, y: 0.08458632, z: 0.013681541}
+--- !u!114 &5432935374895749866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4998390269946302068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f123b0a610fce9545ab069213bf1ba7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 3
+  Hitted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5232078143844051912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,7 +1806,7 @@ GameObject:
   - component: {fileID: 6533146115819661999}
   m_Layer: 0
   m_Name: mixamorig:LeftHandIndex2
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1479,9 +1836,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6958705550856443359}
+  - component: {fileID: 7322259644052834515}
+  - component: {fileID: 6282150369450908372}
   m_Layer: 0
   m_Name: mixamorig:LeftArm
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1502,6 +1861,43 @@ Transform:
   - {fileID: 6203885813517858846}
   m_Father: {fileID: 1250215614984390163}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7322259644052834515
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5372963115426902884}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.091006994, y: 0.24513839, z: 0.10682965}
+  m_Center: {x: 0.01063579, y: 0.15403754, z: 0.002343863}
+--- !u!114 &6282150369450908372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5372963115426902884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f123b0a610fce9545ab069213bf1ba7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 2
+  Hitted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5420342937916635416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,9 +1907,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1395200836813157199}
+  - component: {fileID: 6113219874286905366}
+  - component: {fileID: 599805288836331811}
   m_Layer: 0
   m_Name: mixamorig:RightForeArm
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1534,6 +1932,43 @@ Transform:
   - {fileID: 2988786961085954351}
   m_Father: {fileID: 7172646383026100706}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6113219874286905366
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5420342937916635416}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.09100699, y: 0.271944, z: 0.10682963}
+  m_Center: {x: 0.01063667, y: 0.14387037, z: 0.002336535}
+--- !u!114 &599805288836331811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5420342937916635416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f123b0a610fce9545ab069213bf1ba7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 2
+  Hitted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5516073820121864291
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,7 +1980,7 @@ GameObject:
   - component: {fileID: 4838510747933113978}
   m_Layer: 0
   m_Name: mixamorig:RightHandThumb2
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1577,7 +2012,7 @@ GameObject:
   - component: {fileID: 4782799652468306191}
   m_Layer: 0
   m_Name: mixamorig:LeftHandMiddle1
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1607,9 +2042,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2332951712200386275}
+  - component: {fileID: 6847061677250400854}
+  - component: {fileID: 6471257120164457020}
   m_Layer: 0
   m_Name: mixamorig:Spine1
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1630,6 +2067,43 @@ Transform:
   - {fileID: 3880707931940804232}
   m_Father: {fileID: 9186766320254480907}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6847061677250400854
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5612646526804683488}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.26, y: 0.11148664, z: 0.27241033}
+  m_Center: {x: -6.5434653e-13, y: -0.058205508, z: 0.030293047}
+--- !u!114 &6471257120164457020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5612646526804683488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f123b0a610fce9545ab069213bf1ba7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 1
+  Hitted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5638486799525053787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1641,7 +2115,7 @@ GameObject:
   - component: {fileID: 155597865058833676}
   m_Layer: 0
   m_Name: mixamorig:RightHandMiddle1
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1671,9 +2145,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1177533594305648854}
+  - component: {fileID: 3669393107807602598}
+  - component: {fileID: 5826586208163096958}
   m_Layer: 0
   m_Name: mixamorig:LeftFoot
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1694,6 +2170,43 @@ Transform:
   - {fileID: 7585042627593909833}
   m_Father: {fileID: 6048690166153060410}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3669393107807602598
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6043448066628846163}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.099217124, y: 0.27797326, z: 0.084076814}
+  m_Center: {x: 0.010197638, y: 0.08458633, z: 0.01368152}
+--- !u!114 &5826586208163096958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6043448066628846163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f123b0a610fce9545ab069213bf1ba7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 3
+  Hitted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6268927625966510919
 GameObject:
   m_ObjectHideFlags: 0
@@ -1705,7 +2218,7 @@ GameObject:
   - component: {fileID: 1160764134731310909}
   m_Layer: 0
   m_Name: mixamorig:LeftHandThumb2
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1737,7 +2250,7 @@ GameObject:
   - component: {fileID: 7001349917554471823}
   m_Layer: 0
   m_Name: mixamorig:Head
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1769,7 +2282,7 @@ GameObject:
   - component: {fileID: 7274301608001161527}
   m_Layer: 0
   m_Name: mixamorig:RightHandPinky4
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1800,7 +2313,7 @@ GameObject:
   - component: {fileID: 636827882687886239}
   m_Layer: 0
   m_Name: mixamorig:LeftToe_End
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1831,7 +2344,7 @@ GameObject:
   - component: {fileID: 8557350878942464689}
   m_Layer: 0
   m_Name: mixamorig:LeftHandThumb1
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1863,7 +2376,7 @@ GameObject:
   - component: {fileID: 5639517806162354667}
   m_Layer: 0
   m_Name: mixamorig:RightHandRing1
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1895,7 +2408,7 @@ GameObject:
   - component: {fileID: 121131219871256668}
   m_Layer: 0
   m_Name: mixamorig:LeftHandRing3
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1927,7 +2440,7 @@ GameObject:
   - component: {fileID: 2361994143397129131}
   m_Layer: 0
   m_Name: mixamorig:LeftHandPinky3
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1959,7 +2472,7 @@ GameObject:
   - component: {fileID: 6875740143876075757}
   m_Layer: 0
   m_Name: mixamorig:RightToe_End
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1990,7 +2503,7 @@ GameObject:
   - component: {fileID: 7823681795172284752}
   m_Layer: 0
   m_Name: mixamorig:LeftHandPinky2
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2023,7 +2536,7 @@ GameObject:
   - component: {fileID: 6917863934054552260}
   m_Layer: 0
   m_Name: Alpha_Surface
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2157,9 +2670,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4724446717899159207}
+  - component: {fileID: 8543355727351033607}
+  - component: {fileID: 5145818761584411884}
   m_Layer: 0
   m_Name: mixamorig:RightUpLeg
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2180,6 +2695,43 @@ Transform:
   - {fileID: 8992908791214573629}
   m_Father: {fileID: 8869006708064649624}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8543355727351033607
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342318668538983020}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1489525, y: 0.4123646, z: 0.18056919}
+  m_Center: {x: -0.019102626, y: 0.20338604, z: -0.007019087}
+--- !u!114 &5145818761584411884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342318668538983020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f123b0a610fce9545ab069213bf1ba7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 3
+  Hitted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7373633871077008566
 GameObject:
   m_ObjectHideFlags: 0
@@ -2191,7 +2743,7 @@ GameObject:
   - component: {fileID: 3902166571445935277}
   m_Layer: 0
   m_Name: mixamorig:LeftHandPinky4
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2222,7 +2774,7 @@ GameObject:
   - component: {fileID: 8154913916420326242}
   m_Layer: 0
   m_Name: mixamorig:LeftHandPinky1
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2254,7 +2806,7 @@ GameObject:
   - component: {fileID: 6832536374859299289}
   m_Layer: 0
   m_Name: mixamorig:LeftHandMiddle4
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2283,9 +2835,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8992908791214573629}
+  - component: {fileID: 1506425799833716036}
+  - component: {fileID: 2019767670529437814}
   m_Layer: 0
   m_Name: mixamorig:RightLeg
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2306,6 +2860,43 @@ Transform:
   - {fileID: 4088934514662940827}
   m_Father: {fileID: 4724446717899159207}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1506425799833716036
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8291341509421394863}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.11837611, y: 0.39558494, z: 0.15681116}
+  m_Center: {x: 0.004793916, y: 0.21214424, z: -0.0042039678}
+--- !u!114 &2019767670529437814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8291341509421394863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f123b0a610fce9545ab069213bf1ba7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 3
+  Hitted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8389853156763327931
 GameObject:
   m_ObjectHideFlags: 0
@@ -2317,7 +2908,7 @@ GameObject:
   - component: {fileID: 1753702878007113468}
   m_Layer: 0
   m_Name: mixamorig:LeftHandThumb4
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2348,7 +2939,7 @@ GameObject:
   - component: {fileID: 4298173600108390094}
   m_Layer: 0
   m_Name: mixamorig:RightHandMiddle4
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2379,7 +2970,7 @@ GameObject:
   - component: {fileID: 5041199350578745881}
   m_Layer: 0
   m_Name: mixamorig:RightHandThumb1
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2409,9 +3000,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3880707931940804232}
+  - component: {fileID: 8924905688788074175}
+  - component: {fileID: 4593817765901698661}
   m_Layer: 0
   m_Name: mixamorig:Spine2
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2434,6 +3027,43 @@ Transform:
   - {fileID: 5977206838492413818}
   m_Father: {fileID: 2332951712200386275}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8924905688788074175
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9086792490536007738}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.28, y: 0.2882799, z: 0.2568541}
+  m_Center: {x: -2.670867e-13, y: 0.030191116, z: 0.038071167}
+--- !u!114 &4593817765901698661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9086792490536007738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f123b0a610fce9545ab069213bf1ba7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 1
+  Hitted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &9184103809674617189
 GameObject:
   m_ObjectHideFlags: 0
@@ -2445,7 +3075,7 @@ GameObject:
   - component: {fileID: 7933464557148134605}
   m_Layer: 0
   m_Name: mixamorig:LeftHandMiddle2
-  m_TagString: Untagged
+  m_TagString: HumanoidEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2474,9 +3104,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3982686549640634636}
     m_Modifications:
+    - target: {fileID: 302921051362494947, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
+      propertyPath: m_TagString
+      value: HumanoidEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 324552891330631332, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
+      propertyPath: m_TagString
+      value: HumanoidEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1125013568405889752, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
+      propertyPath: m_TagString
+      value: HumanoidEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3044563180887244258, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
+      propertyPath: m_TagString
+      value: HumanoidEnemy
+      objectReference: {fileID: 0}
     - target: {fileID: 3679999943442012569, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
       propertyPath: m_Name
       value: Weapon_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 3679999943442012569, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
+      propertyPath: m_TagString
+      value: HumanoidEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 3961688900935326295, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2521,6 +3171,34 @@ PrefabInstance:
     - target: {fileID: 4671173451510555516, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
       propertyPath: m_Name
       value: ShootPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671173451510555516, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
+      propertyPath: m_TagString
+      value: HumanoidEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092530424030829901, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
+      propertyPath: m_TagString
+      value: HumanoidEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5121989043981566702, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
+      propertyPath: m_TagString
+      value: HumanoidEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5226091318754436071, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
+      propertyPath: m_TagString
+      value: HumanoidEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057315607768484323, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
+      propertyPath: m_TagString
+      value: HumanoidEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719164476171803943, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
+      propertyPath: m_TagString
+      value: HumanoidEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8405514803657038072, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
+      propertyPath: m_TagString
+      value: HumanoidEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 9085189929629042449, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
       propertyPath: bulletMark
