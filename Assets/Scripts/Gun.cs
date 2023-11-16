@@ -42,6 +42,7 @@ public class Gun : MonoBehaviour
     public bool IsReloading => _reloading;
     
     private Camera _mainCamera = null;
+    private MouseLook _mouseLook;
     private float _nextTimeToFire = 0f;
     private float _normalZoom;
     private bool _reloading = false;
@@ -54,6 +55,7 @@ public class Gun : MonoBehaviour
             TryGetComponent(out audioSource);
         
         _mainCamera = Camera.main;
+        _mouseLook = _mainCamera!.GetComponent<MouseLook>();
         _normalZoom = _mainCamera!.fieldOfView;
         CurrentMagazineSize = magazineSize;
     }

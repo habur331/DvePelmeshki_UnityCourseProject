@@ -103,8 +103,8 @@ GameObject:
   - component: {fileID: 3798370772474678680}
   - component: {fileID: 5597835038309058454}
   - component: {fileID: 694467538044803754}
-  - component: {fileID: 3560074415243018567}
   - component: {fileID: 3079277445234208737}
+  - component: {fileID: 2299114933697341775}
   - component: {fileID: 3525691506941160247}
   m_Layer: 0
   m_Name: Main Camera
@@ -189,21 +189,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4285044671123765693}
   m_Enabled: 1
---- !u!114 &3560074415243018567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4285044671123765693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1adfc29dd35d224fab99fc7d337a366, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraRotateXMin: -90
-  cameraRotateXMax: 90
-  mouseSmooth: 5
 --- !u!114 &3079277445234208737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,6 +201,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 876729ebcee5a694883a00621f78ce74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2299114933697341775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285044671123765693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea98c390cb77d6e449934a4ad1cb5053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 7010687848607348691}
+  camera: {fileID: 5597835038309058454}
+  cameraRotateXMin: -90
+  cameraRotateXMax: 90
+  mouseSmooth: 5
 --- !u!114 &3525691506941160247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,7 +278,6 @@ GameObject:
   - component: {fileID: 4124136147301098762}
   - component: {fileID: 5271414547004566651}
   - component: {fileID: 7618445526971155430}
-  - component: {fileID: 6394738553702981073}
   - component: {fileID: 8769811255808394175}
   - component: {fileID: 5709580217802427666}
   m_Layer: 3
@@ -395,19 +396,6 @@ MonoBehaviour:
   jumpHeight: 2
   jumpDuration: 1
   gravity: 7
---- !u!114 &6394738553702981073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7010687848607348691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a43af6584322e7468539fd015016f19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseSmooth: 5
 --- !u!114 &8769811255808394175
 MonoBehaviour:
   m_ObjectHideFlags: 0
