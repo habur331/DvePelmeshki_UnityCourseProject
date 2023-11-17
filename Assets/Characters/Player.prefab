@@ -457,6 +457,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5547463149149607276}
     - target: {fileID: 4435266425086786551, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
+      propertyPath: magazineSize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4435266425086786551, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
       propertyPath: endReloadSound
       value: 
       objectReference: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
