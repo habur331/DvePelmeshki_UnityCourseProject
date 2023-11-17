@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Bot))]
@@ -16,6 +18,8 @@ public class BotHealth : MonoBehaviour
     [SerializeField] private float chestDamageMultiplier = 1f;
     [SerializeField] private float armDamageMultiplier = 1f;
     [SerializeField] private float legDamageMultiplier = 1f;
+
+    [HideInInspector] public UnityEvent<BotBodyPartEnum, float, Vector3> bodyPartHit;
     
     private float _currentHealth;
 
@@ -43,7 +47,7 @@ public class BotHealth : MonoBehaviour
         
         foreach (var botBodyPart in _bodyParts)
         {
-            botBodyPart.hit.AddListener(ReactToHit);
+            botBodyPart.hitEvent.AddListener(ReactToHit);
         }
         
         _damageMultipliers = new Dictionary<BotBodyPartEnum, float>()
@@ -60,14 +64,18 @@ public class BotHealth : MonoBehaviour
         if (damage < 0)
             throw new InvalidOperationException();
 
-        _currentHealth -= damage * _damageMultipliers[bodyPartEnum];
+        var takenDamage = damage * _damageMultipliers[bodyPartEnum];
+        _currentHealth -= takenDamage;
+        
+        bodyPartHit.Invoke(bodyPartEnum, takenDamage , this.transform.position);
 
         if (_currentHealth <= 0)
             Die();
     }
 
-    public void Die()
+    private void Die()
     {
+        this.enabled = false;
         _bot.StopAllCoroutines();
         _bot.enabled = false;
         Destroy(_bot.CurrentGun.gameObject);

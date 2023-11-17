@@ -9,10 +9,10 @@ public class BotBodyPart : MonoBehaviour, IReactiveTarget
 {
     [SerializeField] private BotBodyPartEnum bodyPart;
     
-    [HideInInspector] public UnityEvent<BotBodyPartEnum, int> hit;
+    [HideInInspector] public UnityEvent<BotBodyPartEnum, int> hitEvent;
 
     public void ReactToHit(int damage = 0)
     {
-       hit.Invoke(bodyPart, damage);
+       hitEvent.Invoke(bodyPart, damage);
     }
 }

@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 2
-  hit:
+  hitEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!136 &6080892138555312239
@@ -652,7 +652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 2
-  hit:
+  hitEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1147942958973114682
@@ -801,7 +801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 2
-  hit:
+  hitEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1681822277636261098
@@ -980,7 +980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 3
-  hit:
+  hitEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!136 &8556748066385537539
@@ -1160,7 +1160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 3
-  hit:
+  hitEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!136 &9218002916449694536
@@ -1403,7 +1403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 1
-  hit:
+  hitEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &3087692158304427517
@@ -1709,7 +1709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 2
-  hit:
+  hitEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!136 &5509401636436411301
@@ -1853,6 +1853,7 @@ GameObject:
   - component: {fileID: 8525724139222291420}
   - component: {fileID: 3058358089922082981}
   - component: {fileID: 1597491962689582798}
+  - component: {fileID: 860299989807277556}
   m_Layer: 0
   m_Name: Y Bot
   m_TagString: HumanoidEnemy
@@ -1934,7 +1935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e52f8bb2fbddaba41a796b252c1ad81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingEnable: 1
+  shootingEnable: 0
   gunShootPoint: {fileID: 900161625589862446}
   playerOffset: {x: 0, y: -1, z: 0}
   delayBeforeShooting: 0.5
@@ -1952,11 +1953,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7eee60df0881b42bf73bd2324d94f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 1000
   headDamageMultiplier: 1
   chestDamageMultiplier: 1
   armDamageMultiplier: 1
   legDamageMultiplier: 1
+  bodyPartHit:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &860299989807277556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4327546909099965366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b310eb9452a7304cb668382737dd143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePopup: {fileID: 2965043972818485012, guid: a49356cbf4e897346875e27ed6f5444e, type: 3}
+  showTime: 1
 --- !u!1 &4513046442428542866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1999,6 +2017,7 @@ GameObject:
   - component: {fileID: 8869006708064649624}
   - component: {fileID: 8297425724447043956}
   - component: {fileID: 3827159929484957725}
+  - component: {fileID: 4256176774758651480}
   m_Layer: 0
   m_Name: mixamorig:Hips
   m_TagString: HumanoidEnemy
@@ -2072,6 +2091,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4256176774758651480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4596734520377465069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f123b0a610fce9545ab069213bf1ba7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 1
+  hitEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4998390269946302068
 GameObject:
   m_ObjectHideFlags: 0
@@ -2185,7 +2220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 2
-  hit:
+  hitEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!136 &3490343151022145407
@@ -2333,7 +2368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 2
-  hit:
+  hitEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!136 &887890711622857785
@@ -2767,7 +2802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 0
-  hit:
+  hitEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &6369478946129383694
@@ -3209,7 +3244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 3
-  hit:
+  hitEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!136 &2331246734302344262
@@ -3451,7 +3486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 3
-  hit:
+  hitEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!136 &2546605173889035665
