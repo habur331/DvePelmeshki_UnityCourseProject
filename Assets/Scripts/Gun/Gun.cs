@@ -48,6 +48,7 @@ public class Gun : MonoBehaviour
     [SerializeField] [CanBeNull] private AudioClip endReloadSound;
 
     [HideInInspector] public UnityEvent reloadingEvent;
+    [HideInInspector] public UnityEvent shootEvent;
 
     public int CurrentMagazineSize { get; protected set; }
     public int MagazineSize => magazineSize;
@@ -62,7 +63,7 @@ public class Gun : MonoBehaviour
     private bool _reloading = false;
 
     private RecoilEnumerator _recoilEnumerator;
-    private bool _shootedLastFrame = false;
+    private bool _shotLastFrame = false;
     [CanBeNull] private Coroutine _recoilResetCoroutine = null;
 
     private bool MustReload => CurrentMagazineSize == 0;
@@ -86,17 +87,22 @@ public class Gun : MonoBehaviour
     {
         if (!randomRecoil)
         {
-            if (_shootedLastFrame && _recoilResetCoroutine is null && _recoilEnumerator.Started)
+            if (_shotLastFrame && _recoilResetCoroutine is null && _recoilEnumerator.Started)
                 _recoilResetCoroutine = StartCoroutine(ResetRecoil());
 
-            if (_shootedLastFrame && _recoilResetCoroutine is not null)
+            if (_shotLastFrame && _recoilResetCoroutine is not null)
             {
                 StopCoroutine(_recoilResetCoroutine);
                 _recoilResetCoroutine = StartCoroutine(ResetRecoil());
             }
 
-            _shootedLastFrame = false;
+            _shotLastFrame = false;
         }
+    }
+    
+    private void OnDisable()
+    {
+        _reloading = false;
     }
 
     public void Shoot(Transform originTransform)
@@ -108,6 +114,8 @@ public class Gun : MonoBehaviour
 
         if (CanShoot)
         {
+            shootEvent.Invoke();
+            
             _nextTimeToFire = Time.time + 1f / fireRate;
             CurrentMagazineSize--;
 
@@ -131,7 +139,7 @@ public class Gun : MonoBehaviour
             }
 
             ApplyPatternRecoil();
-            _shootedLastFrame = true;
+            _shotLastFrame = true;
         }
     }
 
@@ -175,7 +183,8 @@ public class Gun : MonoBehaviour
         if (startReloadSound != null) audioSource?.PlayOneShot(startReloadSound, 2.5f);
 
         yield return new WaitForSeconds(timeToReload);
-
+        //Надо добавить ожидание пока оружие не появится в руках. Добавлю Свойство Disabled к оружию
+        
         if (endReloadSound != null)
         {
             audioSource?.PlayOneShot(endReloadSound);

@@ -8,29 +8,41 @@ public class PlayerShoot : MonoBehaviour
     [Header("Parameters")]
     [SerializeField] private float zoomInAim = 20;
 
-    public Gun CurrentGun => _currentGun;
+    private GunSelector _gunSelector;
 
     private Camera _mainCamera = null;
     private float _normalZoom;
-    private Gun _currentGun = null;
     
     public void Start()
     {
         _mainCamera = Camera.main;
         _normalZoom = _mainCamera!.fieldOfView;
-        _currentGun = GetComponentInChildren<Gun>();
+        _gunSelector = GetComponentInChildren<GunSelector>();
     }
     
     public void Update()
     {
-        if (Input.GetMouseButton(0))
-        {
-            _currentGun.Shoot(_mainCamera.transform);
-        }
-        
+        Reload();
+        Shoot();
         Aim();
     }
-    
+
+    private void Reload()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            _gunSelector.CurrentGun.Reload();
+        }
+    }
+
+    private void Shoot()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            _gunSelector.CurrentGun.Shoot(_mainCamera.transform);
+        }
+    }
+
     private void Aim()
     {
         if (Input.GetMouseButtonDown(1))

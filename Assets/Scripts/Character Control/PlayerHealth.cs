@@ -7,9 +7,13 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour, IReactiveTarget
 {
     [SerializeField] private int health = 100;
-    private int _currentHealth;
     [SerializeField] private GameObject player;
     [SerializeField] private Vector3 playerSpawnPosition;
+
+    public int Health => _currentHealth;
+    
+    private int _currentHealth;
+    
 
     void Start()
     {
