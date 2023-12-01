@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2933556877470431052}
   - component: {fileID: 5788263373904334121}
-  - component: {fileID: 7198363363315355504}
   m_Layer: 0
   m_Name: Weapon Camera
   m_TagString: Untagged
@@ -84,14 +83,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &7198363363315355504
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218034350077141671}
-  m_Enabled: 1
 --- !u!1 &4285044671123765693
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,6 +445,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon_01
       objectReference: {fileID: 0}
+    - target: {fileID: 4965438261709640327, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5738456080911321149, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -497,19 +492,67 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4965438261709640327, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3372025997300724430}
+    - targetCorrespondingSourceObject: {fileID: 4965438261709640327, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3524229296217918173}
   m_SourcePrefab: {fileID: 100100000, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
 --- !u!114 &1837776076853562908 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4435266425086786551, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
   m_PrefabInstance: {fileID: 2597500332692141547}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 6981963708188911468}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfccfa9f4cc1fdb41893832a93424926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6981963708188911468 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4965438261709640327, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
+  m_PrefabInstance: {fileID: 2597500332692141547}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3372025997300724430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6981963708188911468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67a93a71a8692a34c8f1820f087915d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableAngle: 30
+  timeToTakeInHand: 0.7
+  punchForce: 0.1
+  shootAnimationDuration: 0.1
+  vibrato: 10
+  elasticity: 1
+  gunIsTakenInHand:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3524229296217918173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6981963708188911468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 130b312392f18d84db3d978b693e70e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootSound: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
+  takeGunInHandSound: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
+  startReloadSound: {fileID: 8300000, guid: 2dc35d77cfe164a2eab57d08500740e2, type: 3}
+  endReloadSound: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
 --- !u!4 &7759486296123555286 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5738456080911321149, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
@@ -638,6 +681,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3679999943442012569, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
       insertIndex: 1
       addedObject: {fileID: 3331892759883074360}
+    - targetCorrespondingSourceObject: {fileID: 3679999943442012569, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2025948540425467833}
+    - targetCorrespondingSourceObject: {fileID: 3679999943442012569, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6432828728877205682}
   m_SourcePrefab: {fileID: 100100000, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
 --- !u!114 &3332016471792390113 stripped
 MonoBehaviour:
@@ -751,6 +800,43 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2025948540425467833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7149846195488215401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67a93a71a8692a34c8f1820f087915d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableAngle: 30
+  timeToTakeInHand: 0.7
+  punchForce: 0.1
+  shootAnimationDuration: 0.1
+  vibrato: 10
+  elasticity: 1
+  gunIsTakenInHand:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6432828728877205682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7149846195488215401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 130b312392f18d84db3d978b693e70e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootSound: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
+  takeGunInHandSound: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
+  startReloadSound: {fileID: 8300000, guid: 2dc35d77cfe164a2eab57d08500740e2, type: 3}
+  endReloadSound: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
 --- !u!4 &7409011103218979495 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3961688900935326295, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}

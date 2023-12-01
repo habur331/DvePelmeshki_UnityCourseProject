@@ -708,29 +708,6 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &762244715 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6981963708188911468, guid: afda56f3bcfd50044912116dda279beb, type: 3}
-  m_PrefabInstance: {fileID: 1084187368}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &762244719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 762244715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67a93a71a8692a34c8f1820f087915d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableAngle: 30
-  timeToTakeInHand: 0.7
-  punchForce: 0.1
-  shootAnimationDuration: 0.1
-  vibrato: 10
-  elasticity: 1
 --- !u!1 &798921639
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,10 +1008,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 933498632088812851, guid: afda56f3bcfd50044912116dda279beb, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3525691506941160247, guid: afda56f3bcfd50044912116dda279beb, type: 3}
       propertyPath: interactButton
       value: 
@@ -1087,21 +1060,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7149846195488215401, guid: afda56f3bcfd50044912116dda279beb, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7198363363315355504, guid: afda56f3bcfd50044912116dda279beb, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6981963708188911468, guid: afda56f3bcfd50044912116dda279beb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 762244719}
-    - targetCorrespondingSourceObject: {fileID: 7149846195488215401, guid: afda56f3bcfd50044912116dda279beb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2029858535}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afda56f3bcfd50044912116dda279beb, type: 3}
 --- !u!1 &1105017347
 GameObject:
@@ -1506,29 +1468,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e07f1d16338db724995ef5ca7d11434a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2029858531 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7149846195488215401, guid: afda56f3bcfd50044912116dda279beb, type: 3}
-  m_PrefabInstance: {fileID: 1084187368}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2029858535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2029858531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67a93a71a8692a34c8f1820f087915d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableAngle: 30
-  timeToTakeInHand: 0.7
-  punchForce: 0.1
-  shootAnimationDuration: 0.1
-  vibrato: 10
-  elasticity: 1
 --- !u!1 &2043436144
 GameObject:
   m_ObjectHideFlags: 0

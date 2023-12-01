@@ -14,6 +14,8 @@ using Random = System.Random;
 
 public class Gun : MonoBehaviour
 {
+    #region Inspector
+
     [Header("Shooting")]
     [SerializeField] private int damage = 10;
     [SerializeField] private float fireRate = 15f;
@@ -39,22 +41,31 @@ public class Gun : MonoBehaviour
     [Header("Visual effects")]
     [SerializeField] [CanBeNull] private GameObject bulletMark;
     [SerializeField] [CanBeNull] private new ParticleSystem particleSystem;
-    [SerializeField] [CanBeNull] private AudioSource audioSource;
 
-    [Space]
-    [Header("Audio effects")]
-    [SerializeField] [CanBeNull] private AudioClip shootSound;
-    [SerializeField] [CanBeNull] private AudioClip startReloadSound;
-    [SerializeField] [CanBeNull] private AudioClip endReloadSound;
+    #endregion
+
+
+    #region Events
 
     [HideInInspector] public UnityEvent reloadingEvent;
+    [HideInInspector] public UnityEvent startReloadingEvent;
+    [HideInInspector] public UnityEvent stopReloadingEvent;
     [HideInInspector] public UnityEvent shootEvent;
+
+    #endregion
+
+    
+    #region Public State
 
     public bool IsActive { get; set; } = true;
     public int CurrentMagazineSize { get; protected set; }
     public int MagazineSize => magazineSize;
     public bool IsReloading => _reloading;
 
+    #endregion
+    
+    
+    #region Private state
 
     private Random _random;
     private Camera _mainCamera = null;
@@ -70,11 +81,11 @@ public class Gun : MonoBehaviour
     private bool MustReload => CurrentMagazineSize == 0;
     private bool CanShoot => Time.time >= _nextTimeToFire && !MustReload && !_reloading && IsActive;
 
+    #endregion
+
+    
     private void Start()
     {
-        if (audioSource is null)
-            TryGetComponent(out audioSource);
-
         _mainCamera = Camera.main;
         _mouseLook = _mainCamera!.GetComponent<MouseLook>();
         _normalZoom = _mainCamera!.fieldOfView;
@@ -122,8 +133,6 @@ public class Gun : MonoBehaviour
 
             // ReSharper disable once Unity.NoNullPropagation
             particleSystem?.Play();
-            // ReSharper disable once Unity.NoNullPropagation
-            if (shootSound != null) audioSource?.PlayOneShot(shootSound);
 
             var direction = originTransform.forward;
             if (randomRecoil)
@@ -180,18 +189,11 @@ public class Gun : MonoBehaviour
         _reloading = true;
         _nextTimeToFire = Time.time + timeToReload;
 
-        yield return null;
-        if (startReloadSound != null) audioSource?.PlayOneShot(startReloadSound, 2.5f);
+        yield return new WaitForNextFrameUnit();
+        startReloadingEvent.Invoke();
 
         yield return new WaitForSeconds(timeToReload);
-        //Надо добавить ожидание пока оружие не появится в руках. Добавлю Свойство Disabled к оружию
-        
-        if (endReloadSound != null)
-        {
-            audioSource?.PlayOneShot(endReloadSound);
-            yield return new WaitForSeconds(endReloadSound.length);
-        }
-
+        stopReloadingEvent.Invoke();
         CurrentMagazineSize = magazineSize;
         _reloading = false;
     }

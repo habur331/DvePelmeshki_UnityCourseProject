@@ -5,6 +5,7 @@ using DG.Tweening;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Gun))]
 public class GunAnimation : MonoBehaviour
@@ -21,7 +22,7 @@ public class GunAnimation : MonoBehaviour
     [SerializeField] private int vibrato = 10;
     [SerializeField] private float elasticity = 1f;
 
-    [HideInInspector] public UnityEvent weaponIsTakenInHand;
+    [FormerlySerializedAs("weaponIsTakenInHand")] [HideInInspector] public UnityEvent gunIsTakenInHand;
 
     private Gun _gun;
 
@@ -61,7 +62,7 @@ public class GunAnimation : MonoBehaviour
                 })
                 .OnComplete(() =>
                 {
-                    weaponIsTakenInHand.Invoke();
+                    gunIsTakenInHand.Invoke();
                     _gun.IsActive = true;
                 })
                 .OnKill(() => transform.localRotation = Quaternion.Euler(_activeRotation));
