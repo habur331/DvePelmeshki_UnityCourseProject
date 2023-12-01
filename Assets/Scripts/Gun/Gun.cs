@@ -50,6 +50,7 @@ public class Gun : MonoBehaviour
     [HideInInspector] public UnityEvent reloadingEvent;
     [HideInInspector] public UnityEvent shootEvent;
 
+    public bool IsActive { get; set; } = true;
     public int CurrentMagazineSize { get; protected set; }
     public int MagazineSize => magazineSize;
     public bool IsReloading => _reloading;
@@ -67,7 +68,7 @@ public class Gun : MonoBehaviour
     [CanBeNull] private Coroutine _recoilResetCoroutine = null;
 
     private bool MustReload => CurrentMagazineSize == 0;
-    private bool CanShoot => Time.time >= _nextTimeToFire && !MustReload && !_reloading;
+    private bool CanShoot => Time.time >= _nextTimeToFire && !MustReload && !_reloading && IsActive;
 
     private void Start()
     {

@@ -725,6 +725,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a93a71a8692a34c8f1820f087915d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableAngle: 30
+  timeToTakeInHand: 0.7
   punchForce: 0.1
   shootAnimationDuration: 0.1
   vibrato: 10
@@ -1521,6 +1523,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a93a71a8692a34c8f1820f087915d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableAngle: 30
+  timeToTakeInHand: 0.7
   punchForce: 0.1
   shootAnimationDuration: 0.1
   vibrato: 10
