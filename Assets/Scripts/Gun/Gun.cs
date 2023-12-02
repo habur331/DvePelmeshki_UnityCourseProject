@@ -19,7 +19,7 @@ public class Gun : MonoBehaviour
     [Header("Shooting")]
     [SerializeField] private int damage = 10;
     [SerializeField] private float fireRate = 15f;
-    [SerializeField] private float zoomInAim = 20;
+    [SerializeField] private LayerMask notTargetLayers;
 
     [Space]
     [Header("Recoil")]
@@ -139,7 +139,7 @@ public class Gun : MonoBehaviour
                 direction = Quaternion.Euler(GetRandomRecoil()) * direction;
             
             var ray = new Ray(originTransform.position, direction);
-            if (!Physics.Raycast(ray, out var hit)) return;
+            if (!Physics.Raycast(ray, out var hit, float.MaxValue, ~notTargetLayers)) return;
 
             PlaceBulletMark(hit);
 
