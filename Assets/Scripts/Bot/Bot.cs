@@ -27,6 +27,8 @@ public class Bot : MonoBehaviour
     private bool _isShooting = false;
     private bool CanShoot => shootingEnable && !_currentGun.IsReloading;
 
+    private Tweener _lookAtTweener;
+
     private void Start()
     {
         _currentGun = GetComponentInChildren<Gun>();
@@ -46,15 +48,10 @@ public class Bot : MonoBehaviour
                     Invoke(nameof(StartShooting), delayBeforeShooting);
                 }
             }
-            else
-            {
-                // Stop shooting if the player is not in front
-                //isShooting = false;
-                //CancelInvoke(nameof(StartShooting));
-            }
         }
-
-        transform.DODynamicLookAt(_player.transform.position + playerOffset, 0.5f).SetEase(Ease.Linear);
+        
+        _lookAtTweener?.Kill();
+        _lookAtTweener = transform.DOLookAt(_player.transform.position + playerOffset, 0.5f).SetEase(Ease.Linear);
     }
 
     private void StartShooting()
@@ -91,10 +88,4 @@ public class Bot : MonoBehaviour
         StopCoroutine(ShootAtPlayer());
         StopAllCoroutines();
     }
-
-    /*private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(gunShootPoint.transform.position, gunShootPoint.transform.forward * 50);
-    }*/
 }

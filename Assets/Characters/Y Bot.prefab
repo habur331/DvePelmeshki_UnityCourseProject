@@ -2010,7 +2010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e52f8bb2fbddaba41a796b252c1ad81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingEnable: 0
+  shootingEnable: 1
   gunShootPoint: {fileID: 900161625589862446}
   playerOffset: {x: 0, y: -1, z: 0}
   delayBeforeShooting: 0.5
@@ -2033,7 +2033,10 @@ MonoBehaviour:
   chestDamageMultiplier: 1
   armDamageMultiplier: 1
   legDamageMultiplier: 1
-  bodyPartHit:
+  bodyPartHitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  botDiedEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &860299989807277556
@@ -3960,11 +3963,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9085189929629042449, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
       propertyPath: randomRecoilBoundaries.x
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9085189929629042449, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
       propertyPath: randomRecoilBoundaries.y
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9085189929629042449, guid: 4d156ab53055e6b48969535eab5d4e02, type: 3}
       propertyPath: recoilPattern.Array.size

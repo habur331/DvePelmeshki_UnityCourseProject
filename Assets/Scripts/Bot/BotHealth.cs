@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
@@ -19,7 +20,8 @@ public class BotHealth : MonoBehaviour
     [SerializeField] private float armDamageMultiplier = 1f;
     [SerializeField] private float legDamageMultiplier = 1f;
 
-    [HideInInspector] public UnityEvent<BotBodyPartEnum, float, Vector3> bodyPartHit;
+    [HideInInspector] public UnityEvent<BotBodyPartEnum, float, Vector3> bodyPartHitEvent;
+    [HideInInspector] public UnityEvent<GameObject> botDiedEvent;
     
     private float _currentHealth;
 
@@ -67,7 +69,7 @@ public class BotHealth : MonoBehaviour
         var takenDamage = damage * _damageMultipliers[bodyPartEnum];
         _currentHealth -= takenDamage;
         
-        bodyPartHit.Invoke(bodyPartEnum, takenDamage , this.transform.position);
+        bodyPartHitEvent.Invoke(bodyPartEnum, takenDamage , this.transform.position);
 
         if (_currentHealth <= 0)
             Die();
@@ -78,6 +80,7 @@ public class BotHealth : MonoBehaviour
         this.enabled = false;
         _bot.StopAllCoroutines();
         _bot.enabled = false;
+        botDiedEvent.Invoke(this.gameObject);
         Destroy(_bot.CurrentGun.gameObject);
         
         _animator.enabled = false;

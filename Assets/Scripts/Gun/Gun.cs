@@ -139,7 +139,7 @@ public class Gun : MonoBehaviour
                 direction = Quaternion.Euler(GetRandomRecoil()) * direction;
             
             var ray = new Ray(originTransform.position, direction);
-            if (!Physics.Raycast(ray, out var hit, float.MaxValue, ~notTargetLayers)) return;
+            if (!Physics.Raycast(ray, out var hit, float.MaxValue, ~notTargetLayers, QueryTriggerInteraction.Ignore)) return;
 
             PlaceBulletMark(hit);
 

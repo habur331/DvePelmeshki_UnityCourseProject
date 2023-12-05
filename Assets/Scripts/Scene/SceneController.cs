@@ -17,9 +17,9 @@ public class SceneController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("ВЫХОД из сцены");
+        /*Debug.Log("ВЫХОД из сцены");
         var component = player.GetComponent<PlayerHealth>();
 
-        component.StartCoroutine(component.Falling());
+        component.StartCoroutine(component.Falling());*/
     } 
 }

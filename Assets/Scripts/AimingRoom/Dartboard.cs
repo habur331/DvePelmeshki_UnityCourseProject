@@ -10,11 +10,9 @@ namespace AimingTrainingRoom
         [SerializeField] float difficulty = 1.5f;
         [SerializeField] float speed = 0f;
         [SerializeField] float distanceToMove = 5.0f;
-        [SerializeField] private Tween moveTween;
-        private void Start()
-        {
-            
-        }
+        
+        private Tween _moveTween;
+        
         
         public IEnumerator StartMoving(float level)
         {
@@ -29,10 +27,11 @@ namespace AimingTrainingRoom
             if (level > 1)
                 speed = difficulty * Mathf.Pow(levelFactor, (level));
 
-            moveTween = transform.DOMoveX(transform.position.x + distanceToMove, 2 / speed) // 2 is the duration
+            _moveTween = transform.DOMoveX(transform.position.x + distanceToMove, 2 / speed) // 2 is the duration
                 .SetLoops(-1, LoopType.Yoyo)
                 .SetEase(Ease.InOutSine);
         }
+        
         public void ReactToHit(int damage = 0)
         {
             Debug.Log("Попал в мишень.");
@@ -41,9 +40,10 @@ namespace AimingTrainingRoom
             
             StartCoroutine(Die());
         }
+        
         public IEnumerator Die()
         {
-            moveTween.Kill();
+            _moveTween.Kill();
             this.transform.Rotate(75, 0, 0);
             yield return new WaitForSeconds(1.5f);
             

@@ -18,7 +18,7 @@ public class BotSound : MonoBehaviour
         _botHealth = GetComponent<BotHealth>();
         _audioSource = GetComponent<AudioSource>();
 
-        _botHealth.bodyPartHit.AddListener((bodyPart, _, _) => PlaySoundOnHit(bodyPart));
+        _botHealth.bodyPartHitEvent.AddListener((bodyPart, _, _) => PlaySoundOnHit(bodyPart));
     }
 
     private void PlaySoundOnHit(BotBodyPartEnum bodyPart)

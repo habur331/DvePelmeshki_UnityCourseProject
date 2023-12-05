@@ -17,7 +17,7 @@ public class DamagePopupGenerator : MonoBehaviour
     private void Start()
     {
         _botHealth = GetComponent<BotHealth>();
-        _botHealth.bodyPartHit.AddListener((bodyPart, damage, position) =>
+        _botHealth.bodyPartHitEvent.AddListener((bodyPart, damage, position) =>
             CreatePopup(bodyPart, damage, position + new Vector3(0, 1.5f) ));
 
         _textColorOnHit = new Dictionary<BotBodyPartEnum, Color>()

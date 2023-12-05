@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - HumanoidEnemy
+  - BotSpawn
+  - BombSpawn
   layers:
   - Default
   - TransparentFX

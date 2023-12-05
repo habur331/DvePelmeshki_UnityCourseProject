@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using AimingTrainingRoom;
+using EventSystem;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -9,21 +11,27 @@ namespace AimingRoom
 {
     public class AimingRoom : MonoBehaviour
     {
-        [SerializeField] private int level;
+         
         [SerializeField] private GameObject dartboardPrefab;
         [SerializeField] private int numberDartboardsOnScene;
-        [FormerlySerializedAs("hitedDartboards")] [SerializeField] private int hitedDartboardsCount;
         [SerializeField] private List<Dartboard> dartboards;
 
+        public static bool IsPlayerIn { get; private set; } = false;
+        
+        private int _currentLevel;
+        private int _startLevel = 1;
+        private int _hitDartboardsCount;
+        
         public void Start()
         {
             dartboards = new();
             numberDartboardsOnScene = 3;
+            Messenger<int>.AddListener(UIEvent.AimRoomLevelInSettingsChanged, OnLevelChangeInSettings);
         }
         
         public void Update()
         {
-            if (dartboards.Count == 0 && hitedDartboardsCount >= level * numberDartboardsOnScene && level >= 1)
+            if (dartboards.Count == 0 && _currentLevel >= 1)
             {
                 LevelUp();
             }
@@ -31,39 +39,58 @@ namespace AimingRoom
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("ВХОД в тренировочную прицела.");
             if (other.CompareTag("Player"))
             {
+                Debug.Log("ВХОД в тренировочную прицела.");
+                IsPlayerIn = true;
                 StartGame();
+            }
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                IsPlayerIn = true;
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            Debug.Log("ВЫХОД в тренировочную прицела.");
-            FinishGame();
+            if (other.CompareTag("Player"))
+            {
+                IsPlayerIn = false;
+                Debug.Log("ВЫХОД в тренировочную прицела.");
+                FinishGame();
+            }
+        }
+
+        private void OnLevelChangeInSettings(int level)
+        {
+            _startLevel = level;
+            if(IsPlayerIn)
+                StartGame();
         }
 
         private void FinishGame()
         {
-            Debug.Log($"Игра закончилась на уровне {level}.");
-            level = 0;
+            Debug.Log($"Игра закончилась на уровне {_currentLevel}.");
+            _currentLevel = 0;
             ClearDartBoard();
         }
 
         private void StartGame()
         {
             Debug.Log("Игра началась");
-            level = 1;
+            _currentLevel = _startLevel;
             SetDartboardsGroup();
-            hitedDartboardsCount = 0;
+            _hitDartboardsCount = 0;
         }
 
         private void LevelUp()
         {
-            level++;
-
-            Debug.Log($"Поднятие уровня на {level}");
+            _currentLevel++;
+            Debug.Log($"Поднятие уровня на {_currentLevel}");
             SetDartboardsGroup();
         }
 
@@ -71,6 +98,7 @@ namespace AimingRoom
         {
             dartboards.Remove(dartboard);
         }
+        
         private void ClearDartBoard()
         {
             foreach (var dartboard in dartboards)
@@ -78,8 +106,10 @@ namespace AimingRoom
                 dartboard.StartCoroutine(dartboard.Die());
             }
         }
+        
         private void SetDartboardsGroup()
         {
+            Messenger<int>.Broadcast(UIEvent.AimRoomLevelChanged, _currentLevel);
             ClearDartBoard();
             
             Thread.Sleep(2);
@@ -95,7 +125,7 @@ namespace AimingRoom
                 Vector3 randomPosition = new Vector3(randomX, randomY, randomZ);
                 var newDartboard = Instantiate(dartboardPrefab, randomPosition, Quaternion.Euler(0, 180, 0));
                 var dartboard = newDartboard.GetComponent<Dartboard>();
-                dartboard.StartCoroutine(dartboard.StartMoving(level));
+                dartboard.StartCoroutine(dartboard.StartMoving(_currentLevel));
                 dartboards.Add(dartboard);
             }
         }
@@ -103,7 +133,7 @@ namespace AimingRoom
         public void MarkHitTarget(Dartboard target)
         {
             if (dartboards.Contains(target))
-                hitedDartboardsCount++;
+                _hitDartboardsCount++;
         }
     }
 

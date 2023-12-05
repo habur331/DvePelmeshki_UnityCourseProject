@@ -5,9 +5,25 @@ using UnityEngine;
 
 public class LockCursor : MonoBehaviour
 {
-   private void Start()
-   {
-      Cursor.visible = false;
-      Cursor.lockState = CursorLockMode.Locked;
-   }
+    private void Start()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        Messenger<bool>.AddListener(GameEvent.PauseStateChanged, OnPauseToggle);
+    }
+
+    private void OnPauseToggle(bool isPaused)
+    {
+        if (isPaused)
+        {
+            Cursor.lockState = CursorLockMode.None; 
+            Cursor.visible = true; 
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false; 
+        }
+    }
 }
