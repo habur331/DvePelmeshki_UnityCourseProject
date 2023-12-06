@@ -88,4 +88,9 @@ public class Bomb : MonoBehaviour, IInteractable
             _timeDiffused = 0;
         _interactedLastFrame = false;
     }
+
+    private void OnDestroy()
+    {
+        StopCoroutine(_timerCoroutine);
+    }
 }
