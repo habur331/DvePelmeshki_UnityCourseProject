@@ -27,8 +27,8 @@ public class BotsNumberSelectorUI : MonoBehaviour
     public void OnButtonClicked(int value)
     {
         botsNumber += value;
-        botsNumber = Math.Max(1, botsNumber);
+        botsNumber = Math.Max(0, botsNumber);
         _text.SetText(botsNumber.ToString());
-        Messenger<int>.Broadcast(UIEvent.AimRoomLevelInSettingsChanged, botsNumber);
+        Messenger<int>.Broadcast(UIEvent.BotsNumberInSettingsChanged, botsNumber);
     }
 }

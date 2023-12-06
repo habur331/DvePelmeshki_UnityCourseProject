@@ -24,6 +24,7 @@ public class FPSInput : MonoBehaviour
     private float gravity = 9f;
 
     private bool isJumping = false;
+    private Vector3? _positionToTransfer;
     
     private CharacterController _characterController;
 
@@ -34,26 +35,42 @@ public class FPSInput : MonoBehaviour
 
     private void Update()
     {
-        var motion = transform.TransformDirection(Keyboard.Input()) * (speed * Time.deltaTime);
+        if (_positionToTransfer is null)
+        {
+            _characterController.enabled = true;
+            var motion = transform.TransformDirection(Keyboard.Input()) * (speed * Time.deltaTime);
 
-        if (Keyboard.IsShiftHeldDown())
-        {
-            motion.x *= accelerationRate;
-            motion.z *= accelerationRate;
-        }
-        
-        if (_characterController.isGrounded)
-        {
-            isJumping = false;
-            if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+            if (Keyboard.IsShiftHeldDown())
             {
-                isJumping = true;
-                Jump();
+                motion.x *= accelerationRate;
+                motion.z *= accelerationRate;
             }
-        }
         
-        motion.y -= gravity * Time.deltaTime;
-        _characterController.Move(motion);
+            if (_characterController.isGrounded)
+            {
+                isJumping = false;
+                if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+                {
+                    isJumping = true;
+                    Jump();
+                }
+            }
+            
+            motion.y -= gravity * Time.deltaTime;
+            
+            _characterController.Move(motion);
+        }
+        else
+        {
+            _characterController.enabled = false;
+            gameObject.transform.position = _positionToTransfer.Value;
+            _positionToTransfer = null;
+        }
+    }
+
+    public void Transfer(Vector3 position)
+    {
+        _positionToTransfer = position;
     }
     
     private void Jump()

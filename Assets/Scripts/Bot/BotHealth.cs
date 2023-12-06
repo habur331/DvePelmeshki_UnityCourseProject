@@ -81,7 +81,8 @@ public class BotHealth : MonoBehaviour
         _bot.StopAllCoroutines();
         _bot.enabled = false;
         botDiedEvent.Invoke(this.gameObject);
-        Destroy(_bot.CurrentGun.gameObject);
+        if(_bot.CurrentGun != null)
+            Destroy(_bot.CurrentGun.gameObject);
         
         _animator.enabled = false;
         foreach (var rigidbody in _rigidbodies)

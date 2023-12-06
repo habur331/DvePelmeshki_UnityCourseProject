@@ -21,8 +21,8 @@ public class BotsRoom : MonoBehaviour
     private List<Transform> _botSpawnPositions;
     private List<Transform> _bombSpawnPositions;
 
-    [CanBeNull] private Bomb _bomb;
-    [CanBeNull] private List<BotHealth> _bots;
+    [CanBeNull] private GameObject _bomb;
+    [CanBeNull] private List<GameObject> _bots;
     private Player _player;
     private int _botsNumber = 5;
 
@@ -37,7 +37,20 @@ public class BotsRoom : MonoBehaviour
             .ToList();
 
         Messenger.AddListener(GameEvent.PlayerDied, OnPlayerDied);
-        Messenger<int>.AddListener(UIEvent.BotsNumberInSettingsChanged, value => _botsNumber = value);
+        Messenger<int>.AddListener(UIEvent.BotsNumberInSettingsChanged, value =>
+        {
+            _botsNumber = value;
+        });
+    }
+
+    private void Update()
+    {
+        if (!IsPlayerIn)
+        {
+            //FinishRoom();
+        }
+
+        IsPlayerIn = false;
     }
 
     #region Trgger events
@@ -75,19 +88,20 @@ public class BotsRoom : MonoBehaviour
 
     private void StartRoom()
     {
-        _ = SpawnBots();
-        var bomb = SpawnBomb();
+        FinishRoom();
+        SpawnBots();
+        SpawnBomb();
 
-        Messenger<GameObject>.Broadcast(GameEvent.BombPlanted, bomb);
+        Messenger<GameObject>.Broadcast(GameEvent.BombPlanted, _bomb);
     }
 
     private void FinishRoom()
     {
-        if (_bomb is not null)
-            Destroy(_bomb.gameObject);
+        if (_bomb != null)
+            Destroy(_bomb);
 
         if (_bots is not null)
-            _bots.ForEach(bot => Destroy(bot.gameObject));
+            _bots.ForEach(Destroy);
 
         _bomb = null;
         _bots = null;
@@ -99,34 +113,28 @@ public class BotsRoom : MonoBehaviour
         StartRoom();
     }
 
-    private List<GameObject> SpawnBots()
+    private void SpawnBots()
     {
         var spawnPositions = _botSpawnPositions.GetRandomElements(_botsNumber);
 
-        var botGameObjects = spawnPositions
+        _bots = spawnPositions
             .Select(position => Instantiate(_botPrefab, position)).ToList();
 
-        _bots = botGameObjects.Select(botGameObject =>
-            {
-                var bot = botGameObject.GetComponent<BotHealth>();
-                bot.botDiedEvent.AddListener(OnBotDied);
-                return bot;
-            })
-            .ToList();
-
-        return botGameObjects;
+        _bots.ForEach(botGameObject =>
+        {
+            var bot = botGameObject.GetComponent<BotHealth>();
+            bot.botDiedEvent.AddListener(OnBotDied);
+        });
     }
 
-    private GameObject SpawnBomb()
+    private void SpawnBomb()
     {
         var spawnPosition = _bombSpawnPositions.GetRandomElements(1).Single();
-        var bombGameObject = Instantiate(_bombPrefab, spawnPosition);
+        _bomb = Instantiate(_bombPrefab, spawnPosition);
 
-        _bomb = bombGameObject.GetComponentInChildren<Bomb>();
-        _bomb!.bombDiffusedEvent.AddListener(OnBombDiffused);
-        _bomb!.bombBlowUpEvent.AddListener(OnBombBlowUp);
-
-        return bombGameObject;
+        var bomb = _bomb!.GetComponentInChildren<Bomb>();
+        bomb!.bombDiffusedEvent.AddListener(OnBombDiffused);
+        bomb!.bombBlowUpEvent.AddListener(OnBombBlowUp);
     }
 
     private void OnBombBlowUp()
@@ -144,11 +152,12 @@ public class BotsRoom : MonoBehaviour
 
     private void OnBotDied(GameObject bot)
     {
-        _bots!.Remove(bot.GetComponent<BotHealth>());
+        _bots!.Remove(bot);
     }
 
     private void OnPlayerDied()
     {
+        IsPlayerIn = false;
         FinishRoom();
         // player died and he will be transfered to spawn
     }

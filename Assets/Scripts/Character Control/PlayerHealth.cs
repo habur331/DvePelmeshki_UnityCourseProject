@@ -22,6 +22,7 @@ public class PlayerHealth : MonoBehaviour, IReactiveTarget
     void Start()
     {
         _playerGameObject = GameObject.FindGameObjectsWithTag("Player")[0];
+        _player = GetComponent<Player>();
         playerSpawnPosition = _playerGameObject.transform.position;
         _currentHealth = health;
     }

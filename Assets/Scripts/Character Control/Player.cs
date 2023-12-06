@@ -13,6 +13,7 @@ namespace Character_Control
         private FPSInput _fpsInput;
         private PlayerShoot _playerShoot;
         private PlayerHealth _playerHealth;
+        private GunSelector _gunSelector;
         private Vector3 _spawnPosition;
 
         private void Start()
@@ -22,6 +23,7 @@ namespace Character_Control
             _fpsInput = GetComponent<FPSInput>();
             _playerShoot = GetComponent<PlayerShoot>();
             _playerHealth = GetComponent<PlayerHealth>();
+            _gunSelector = GetComponentInChildren<GunSelector>();
 
             Messenger<bool>.AddListener(GameEvent.PauseStateChanged, OnPauseToggle);
         }
@@ -30,11 +32,18 @@ namespace Character_Control
         {
             Debug.Log("You are dying");
             Messenger.Broadcast(GameEvent.PlayerDied);
+            TransferToSpawn();
+            _playerHealth.RestoreHealth();
         }
 
+        public void TransferTo(Vector3 position)
+        {
+            _fpsInput.Transfer(position);
+        }
+        
         public void TransferToSpawn()
         {
-            transform.DOMove(_spawnPosition, 0.000001f);
+            _fpsInput.Transfer(_spawnPosition);
         }
 
         private void OnPauseToggle(bool isPaused)
@@ -42,6 +51,7 @@ namespace Character_Control
             _mouseLook.enabled = !isPaused;
             _fpsInput.enabled = !isPaused;
             _playerShoot.enabled = !isPaused;
+            _gunSelector.enabled = !isPaused;
         }
     }
 }
