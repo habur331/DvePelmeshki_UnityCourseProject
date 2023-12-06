@@ -27,7 +27,7 @@ public class BombTimerUI : MonoBehaviour
 
     private void UpdateTimer()
     {
-        if (_bomb != null)
+        if (_bomb != null && _bomb.enabled)
         {
             if(!_text.gameObject.activeSelf)
                 _text.gameObject.SetActive(true);

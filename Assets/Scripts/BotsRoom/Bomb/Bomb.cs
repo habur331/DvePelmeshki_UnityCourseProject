@@ -13,9 +13,11 @@ public class Bomb : MonoBehaviour, IInteractable
     [SerializeField] private int timeToBlowUp = 45;
     
     [Header("Events")]
+    [SerializeField] public UnityEvent bombPlantedEvent;
+    [SerializeField] public UnityEvent bombTickEvent;
     [SerializeField] public UnityEvent bombDiffusedEvent;
     [SerializeField] public UnityEvent bombBlowUpEvent;
-    [SerializeField] public UnityEvent bombTickEvent;
+    
 
     public int TimeLeft => _timeLeftToBlowUp;
     
@@ -28,6 +30,7 @@ public class Bomb : MonoBehaviour, IInteractable
     private void Start()
     {
         StartTimer();
+        bombPlantedEvent.Invoke();
     }
 
     private void Update()
@@ -60,8 +63,9 @@ public class Bomb : MonoBehaviour, IInteractable
     {
         if (_timeLeftToBlowUp <= 0)
         {
-            bombBlowUpEvent.Invoke();
+            bombBlowUpEvent.Invoke(); ;
             StopCoroutine(_timerCoroutine);
+            enabled = false;
         }
     }
     

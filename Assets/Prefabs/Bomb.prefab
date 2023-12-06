@@ -58,15 +58,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1151388028547126963, guid: df7dc12a00a18154ea33b4435448ea17, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.085
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1151388028547126963, guid: df7dc12a00a18154ea33b4435448ea17, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.085
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1151388028547126963, guid: df7dc12a00a18154ea33b4435448ea17, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.085
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1151388028547126963, guid: df7dc12a00a18154ea33b4435448ea17, type: 3}
       propertyPath: m_LocalPosition.x
@@ -257,13 +257,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToDiffuse: 5
   timeToBlowUp: 45
+  bombPlantedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  bombTickEvent:
+    m_PersistentCalls:
+      m_Calls: []
   bombDiffusedEvent:
     m_PersistentCalls:
       m_Calls: []
   bombBlowUpEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  bombTickEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &8076108130800083111
@@ -278,5 +281,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89374a210280b7144a8f15dc5b9f71bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombBlowUpClip: {fileID: 0}
-  bombTickClip: {fileID: 0}
+  bombPlantedClip: {fileID: 8300000, guid: 53c6eafbaaa923f4eab9b35eda973a98, type: 3}
+  bombTickClip: {fileID: 8300000, guid: 5b7be042e017fa147841c925cbe33306, type: 3}
+  bombBlowUpClip: {fileID: 8300000, guid: fa9ab25e40f9a074c99ed18960758e76, type: 3}
