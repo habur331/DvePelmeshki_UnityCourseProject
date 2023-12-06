@@ -93,6 +93,8 @@ public class BotHealth : MonoBehaviour
         {
             botBodyPart.enabled = false;
         }
+        
+        Destroy(gameObject, 3);
 
         /*foreach (var collider in _colliders)
         {
