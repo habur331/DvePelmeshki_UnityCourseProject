@@ -44,6 +44,7 @@ namespace Character_Control
         public void TransferToSpawn()
         {
             _fpsInput.Transfer(_spawnPosition);
+            _playerHealth.RestoreHealth();
         }
 
         private void OnPauseToggle(bool isPaused)
