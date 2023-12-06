@@ -8,7 +8,8 @@ using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public enum DoorType
-{
+{   
+    Default,
     Enter,
     Exit
 }
@@ -16,10 +17,11 @@ public enum DoorType
 public class Door : MonoBehaviour, IInteractable
 {
     [SerializeField] private Transform transferPosition;
-    [SerializeField] private DoorType doorType;
+    [SerializeField] private DoorType type;
 
-    [HideInInspector] public UnityEvent playerEntered;
-    [HideInInspector] public UnityEvent playerExited;
+    [HideInInspector] public UnityEvent playerTransferred;
+
+    public DoorType Type => type;
     
     private GameObject _player;
 
@@ -37,16 +39,6 @@ public class Door : MonoBehaviour, IInteractable
     {
         _player.GetComponent<Player>().TransferTo(transferPosition.position);
         
-        switch (doorType)
-        {
-            case DoorType.Enter:
-                playerEntered.Invoke();
-                break;
-            case DoorType.Exit:
-                playerExited.Invoke();
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+        playerTransferred.Invoke();
     }
 }

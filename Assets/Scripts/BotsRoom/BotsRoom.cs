@@ -16,10 +16,10 @@ public class BotsRoom : MonoBehaviour
 
     [SerializeField] private GameObject _botPrefab;
 
-    public static bool IsPlayerIn { get; private set; }
-
     private List<Transform> _botSpawnPositions;
     private List<Transform> _bombSpawnPositions;
+    private Door _enterDoor;
+    private Door _exitDoor;
 
     [CanBeNull] private GameObject _bomb;
     [CanBeNull] private List<GameObject> _bots;
@@ -29,6 +29,8 @@ public class BotsRoom : MonoBehaviour
     private void Start()
     {
         _player = FindObjectOfType<Player>();
+        _enterDoor = GetComponentsInChildren<Door>().Single(door => door.Type == DoorType.Enter);
+        _exitDoor = GetComponentsInChildren<Door>().Single(door => door.Type == DoorType.Exit);
         _botSpawnPositions = GameObject.FindGameObjectsWithTag("BotSpawn")
             .Select(@object => @object.transform)
             .ToList();
@@ -41,21 +43,16 @@ public class BotsRoom : MonoBehaviour
         {
             _botsNumber = value;
         });
+        
+        _enterDoor.playerTransferred.AddListener(StartRoom);
+        _exitDoor.playerTransferred.AddListener(FinishRoom);
     }
 
-    private void Update()
-    {
-        if (!IsPlayerIn)
-        {
-            //FinishRoom();
-        }
-
-        IsPlayerIn = false;
-    }
+   
 
     #region Trgger events
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -82,13 +79,12 @@ public class BotsRoom : MonoBehaviour
             IsPlayerIn = false;
             FinishRoom();
         }
-    }
+    }*/
 
     #endregion
 
     private void StartRoom()
     {
-        FinishRoom();
         SpawnBots();
         SpawnBomb();
 
@@ -152,12 +148,11 @@ public class BotsRoom : MonoBehaviour
 
     private void OnBotDied(GameObject bot)
     {
-        _bots!.Remove(bot);
+        //_bots!.Remove(bot);
     }
 
     private void OnPlayerDied()
     {
-        IsPlayerIn = false;
         FinishRoom();
         // player died and he will be transfered to spawn
     }
